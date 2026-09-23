@@ -1,0 +1,493 @@
+/* ==========================================================================
+   TeamSumit — Layout Styles (Header, Nav, Footer)
+   Architectural Tech Editorial aesthetic.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------
+   SKIP LINK
+   --------------------------------------------------------------------- */
+.ts-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: var(--z-tooltip);
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  transition: top var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.ts-skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ---------------------------------------------------------------------
+   HEADER
+   --------------------------------------------------------------------- */
+.ts-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky-header);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--color-border-subtle);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: background var(--motion-duration-base) ease;
+}
+
+.ts-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+}
+
+.ts-logo {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-extrabold);
+  font-size: 1.35rem;
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tighter);
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ts-logo-img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-subtle);
+  background: #FFFFFF;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--motion-duration-fast) ease;
+}
+
+.ts-logo-text {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.ts-logo-dot {
+  color: var(--color-accent-highlight);
+}
+
+.ts-logo:hover .ts-logo-img {
+  transform: scale(1.05);
+}
+
+.ts-logo:hover {
+  opacity: 0.9;
+}
+
+.ts-logo:focus-visible {
+  outline: 2px solid var(--color-obsidian);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------------------
+   DESKTOP NAV
+   --------------------------------------------------------------------- */
+.ts-nav--desktop {
+  display: none;
+}
+
+.ts-nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ts-nav-link {
+  position: relative;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  text-decoration: none !important;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.ts-nav-link:hover {
+  color: var(--color-text-primary);
+  background: rgba(17, 18, 21, 0.05);
+}
+
+.ts-nav-link[aria-current='page'] {
+  color: var(--color-text-primary);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.ts-nav-link:focus-visible {
+  outline: 2px solid var(--color-obsidian);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   HEADER ACTIONS
+   --------------------------------------------------------------------- */
+.ts-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ts-header-cta {
+  display: none;
+}
+
+/* Mobile hamburger toggle */
+.ts-nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  z-index: calc(var(--z-sticky-header) + 1);
+}
+
+.ts-nav-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  border-radius: 1px;
+  transition: transform var(--motion-duration-base) var(--motion-easing-standard),
+              opacity var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.ts-nav-toggle[aria-expanded='true'] .ts-nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.ts-nav-toggle[aria-expanded='true'] .ts-nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.ts-nav-toggle[aria-expanded='true'] .ts-nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile nav panel */
+.ts-nav--mobile {
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-6);
+  z-index: var(--z-sticky-header);
+}
+
+.ts-nav-list--mobile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ts-nav-link--mobile {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  text-decoration: none !important;
+}
+.ts-nav-link--mobile:hover {
+  background: var(--color-bg-base);
+}
+.ts-nav-link--mobile[aria-current='page'] {
+  background: var(--color-bg-base);
+  color: var(--color-obsidian);
+}
+
+@media (min-width: 1024px) {
+  .ts-nav--desktop {
+    display: block;
+  }
+  .ts-header-cta {
+    display: inline-flex;
+  }
+  .ts-nav-toggle {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   MAIN CONTENT & SECTIONS
+   --------------------------------------------------------------------- */
+.ts-main {
+  min-height: 60vh;
+}
+
+.ts-section {
+  padding-block: var(--space-20);
+  scroll-margin-top: 80px;
+}
+
+.ts-section--raised {
+  background: var(--color-bg-raised);
+}
+
+@media (min-width: 1024px) {
+  .ts-section {
+    padding-block: var(--space-24);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   HIGH-CONTRAST STATEMENT SECTION (Oréa Studio Inspired)
+   --------------------------------------------------------------------- */
+.ts-statement-section {
+  background-color: var(--color-obsidian) !important;
+  color: #FFFFFF;
+  text-align: center;
+  padding-block: clamp(5rem, 9vw, 8rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.ts-statement-section .ts-eyebrow {
+  color: var(--color-text-inverse-secondary);
+}
+
+.ts-statement-section .ts-section-title {
+  color: #FFFFFF;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  letter-spacing: var(--letter-spacing-tighter);
+  margin-bottom: var(--space-4);
+}
+
+.ts-statement-section .ts-section-subtitle {
+  color: var(--color-text-inverse-secondary);
+  font-size: var(--font-size-md);
+  max-width: 60ch;
+  margin: 0 auto var(--space-8);
+}
+
+.ts-btn--inverted {
+  background-color: #FFFFFF !important;
+  color: #111215 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+.ts-btn--inverted:hover {
+  background-color: var(--color-bg-base) !important;
+  transform: translateY(-2px);
+}
+
+.ts-statement-thumbnails {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  max-width: 860px;
+  margin: var(--space-12) auto 0;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-obsidian-border);
+}
+
+@media (min-width: 640px) {
+  .ts-statement-thumbnails {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ts-statement-thumb {
+  background: var(--color-obsidian-card);
+  border: 1px solid var(--color-obsidian-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: left;
+}
+
+.ts-statement-thumb-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 4px;
+}
+
+.ts-statement-thumb-desc {
+  font-size: 11px;
+  color: var(--color-text-inverse-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------------
+   MONUMENTAL FOOTER (Oréa Studio Inspired)
+   --------------------------------------------------------------------- */
+.ts-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-base);
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-10);
+  overflow: hidden;
+}
+
+.ts-footer-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .ts-footer-top {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.ts-footer-statement {
+  max-width: 460px;
+}
+
+.ts-footer-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.ts-footer-logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-subtle);
+  background: #FFFFFF;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.ts-footer-brand-title {
+  font-family: var(--font-family-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+.ts-footer-desc {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-4);
+}
+
+.ts-footer-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none !important;
+  font-family: var(--font-family-mono);
+  border-bottom: 1px solid var(--color-border-strong);
+  padding-bottom: 2px;
+  transition: all var(--motion-duration-fast) ease;
+}
+.ts-footer-email-link:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.ts-footer-nav-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ts-footer-pill-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+  text-decoration: none !important;
+  transition: all var(--motion-duration-fast) ease;
+}
+.ts-footer-pill-link:hover {
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  border-color: var(--color-obsidian);
+}
+
+/* Giant Display Wordmark across footer */
+.ts-footer-giant-wordmark {
+  margin: var(--space-8) 0;
+  font-family: var(--font-family-heading);
+  font-size: clamp(3.5rem, 13vw, 9.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  color: var(--color-text-primary);
+  user-select: none;
+}
+
+.ts-footer-bottom-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .ts-footer-bottom-bar {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.ts-footer-socials {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.ts-footer-social-item {
+  color: var(--color-text-secondary);
+  text-decoration: none !important;
+  transition: color var(--motion-duration-fast) ease;
+}
+.ts-footer-social-item:hover {
+  color: var(--color-text-primary);
+}

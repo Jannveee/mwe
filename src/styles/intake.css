@@ -1,0 +1,666 @@
+/* ==========================================================================
+   TeamSumit — "Connect With Sumit Sir" Intake Modal
+   Extends the generic .ts-modal-overlay / .ts-modal / .ts-modal-close
+   base defined in components.css. Everything here is intake-specific
+   layout (bottom sheet on mobile, progress dots, role grid, controls).
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------
+   MODAL SURFACE — desktop default is the generic centered .ts-modal;
+   this just adds intake-specific internal spacing.
+   --------------------------------------------------------------------- */
+.ts-intake-modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-top: var(--space-10); /* room for the absolutely-positioned close button */
+}
+
+.ts-intake-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding-right: var(--space-8); /* keep clear of the close button */
+}
+
+.ts-intake-step-subtitle {
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-4);
+}
+
+.ts-intake-placeholder {
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
+}
+
+.ts-intake-placeholder .ts-eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+/* ---------------------------------------------------------------------
+   PROGRESS INDICATOR
+   --------------------------------------------------------------------- */
+.ts-intake-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ts-intake-progress-status {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+.ts-intake-progress-track {
+  display: flex;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ts-intake-progress-dot {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-border-subtle);
+  transition: background-color var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.ts-intake-progress-dot--complete {
+  background: var(--color-obsidian);
+}
+
+.ts-intake-progress-dot--current {
+  background: var(--color-obsidian);
+}
+
+/* ---------------------------------------------------------------------
+   ROLE SELECTION
+   --------------------------------------------------------------------- */
+.ts-intake-role-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.ts-intake-role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  text-align: left;
+  width: 100%;
+  font-family: var(--font-family-body);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: all var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.ts-intake-role-card:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.ts-intake-role-card-title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+}
+
+.ts-intake-role-card-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.ts-intake-role-card--selected {
+  border-color: var(--color-obsidian);
+  background: var(--color-bg-elevated);
+  box-shadow: 0 0 0 1px var(--color-obsidian), var(--shadow-md);
+}
+
+/* ---------------------------------------------------------------------
+   FOOTER CONTROLS — Back / Next / Cancel / Restart
+   --------------------------------------------------------------------- */
+.ts-intake-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.ts-intake-controls-right {
+  display: flex;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------------
+   QUESTIONNAIRE FORM FIELDS — shared by SelectField / TextAreaField
+   --------------------------------------------------------------------- */
+.ts-intake-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.ts-field-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .ts-field-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ts-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ts-field-label {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.ts-field-required {
+  color: var(--color-error);
+}
+
+.ts-field-hint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.ts-field-input {
+  /* 16px minimum avoids iOS Safari zooming the viewport on focus. */
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-body);
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated-solid);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  width: 100%;
+  transition: border-color var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.ts-field-input:focus-visible {
+  outline: 2px solid var(--color-obsidian);
+  outline-offset: 1px;
+  border-color: var(--color-obsidian);
+}
+
+.ts-field-textarea {
+  resize: vertical;
+  min-height: 2.75rem;
+  font-family: inherit;
+  line-height: var(--line-height-normal);
+}
+
+.ts-field-select {
+  cursor: pointer;
+}
+
+.ts-field-input--error {
+  border-color: var(--color-error);
+}
+
+.ts-field-error {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+}
+
+/* ---------------------------------------------------------------------
+   MULTI-SELECT CHECKBOX CARDS — Phase 12
+   --------------------------------------------------------------------- */
+.ts-checkbox-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ts-checkbox-legend {
+  margin-bottom: var(--space-2);
+}
+
+.ts-checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+@media (min-width: 500px) {
+  .ts-checkbox-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ts-checkbox-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-bg-elevated-solid);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+  user-select: none;
+}
+
+.ts-checkbox-card:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-raised);
+}
+
+.ts-checkbox-card--checked {
+  border-color: var(--color-obsidian);
+  background: rgba(17, 18, 21, 0.04);
+}
+
+.ts-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.ts-checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border-strong);
+  background: var(--color-bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.ts-checkbox-input:focus-visible + .ts-checkbox-custom {
+  outline: 2px solid var(--color-obsidian);
+  outline-offset: 2px;
+  border-color: var(--color-obsidian);
+}
+
+.ts-checkbox-card--checked .ts-checkbox-custom {
+  border-color: var(--color-obsidian);
+  background: var(--color-obsidian);
+}
+
+.ts-checkbox-card--checked .ts-checkbox-custom::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.ts-checkbox-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.ts-checkbox-group--error .ts-checkbox-card {
+  border-color: var(--color-error);
+}
+
+/* ---------------------------------------------------------------------
+   REVIEW SUMMARY
+   --------------------------------------------------------------------- */
+.ts-intake-review-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.ts-intake-review-role-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ts-intake-review-role-label {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-muted);
+}
+
+.ts-intake-review-role-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.ts-intake-review-edit-btns {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.ts-intake-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.ts-intake-review-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ts-intake-review-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ts-intake-review-row dt {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-muted);
+}
+
+.ts-intake-review-row dd {
+  margin: 0;
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+}
+
+/* ---------------------------------------------------------------------
+   MAILTO ACTION CARD — Phase 15
+   --------------------------------------------------------------------- */
+.ts-intake-email-card {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ts-intake-email-title {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-obsidian);
+}
+
+.ts-intake-email-desc {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.ts-intake-email-desc code {
+  color: var(--color-obsidian);
+  background: var(--color-bg-raised);
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+}
+
+.ts-intake-email-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ---------------------------------------------------------------------
+   INSTITUTIONAL PROPOSAL PREVIEW — Phase 11
+   --------------------------------------------------------------------- */
+.ts-proposal-preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.ts-proposal-preview {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.ts-proposal-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-4);
+}
+
+.ts-proposal-brand {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-obsidian);
+  margin: 0 0 var(--space-1);
+}
+
+.ts-proposal-doc-tag {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin: 0;
+}
+
+.ts-proposal-meta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-align: right;
+  line-height: var(--line-height-tight);
+}
+
+.ts-proposal-meta-ref {
+  font-family: var(--font-family-mono);
+  font-weight: 600;
+  color: var(--color-obsidian);
+}
+
+.ts-proposal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .ts-proposal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ts-proposal-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ts-proposal-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.ts-proposal-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.ts-proposal-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------
+   MOBILE — bottom sheet
+   Base (mobile-first) styles below target < 640px; the tablet/desktop
+   query restores the centered card layout defined in components.css.
+   --------------------------------------------------------------------- */
+.ts-intake-overlay {
+  align-items: flex-end;
+  padding: 0;
+}
+
+.ts-intake-modal {
+  max-width: 100%;
+  width: 100%;
+  max-height: 92vh;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-bottom: none;
+  padding: var(--space-6);
+  padding-top: var(--space-10);
+  /* Slide-up entrance; respects prefers-reduced-motion below. */
+  animation: ts-intake-sheet-in var(--motion-duration-base, 200ms) var(--motion-easing-standard, ease-out);
+}
+
+.ts-intake-controls {
+  flex-direction: column-reverse;
+  align-items: stretch;
+}
+
+.ts-intake-controls-left,
+.ts-intake-controls-right {
+  display: flex;
+  width: 100%;
+}
+
+.ts-intake-controls-right {
+  margin-left: 0;
+  flex-direction: column-reverse;
+}
+
+.ts-intake-controls-right .ts-btn,
+.ts-intake-controls-left .ts-btn {
+  width: 100%;
+}
+
+@keyframes ts-intake-sheet-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-intake-modal {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   TABLET / DESKTOP — centered dialog, side-by-side controls, 2-col grid
+   --------------------------------------------------------------------- */
+@media (min-width: 640px) {
+  .ts-intake-overlay {
+    align-items: center;
+    padding: var(--space-4);
+  }
+
+  .ts-intake-modal {
+    max-width: 620px;
+    border-radius: var(--radius-xl);
+    animation: none;
+  }
+
+  .ts-intake-role-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ts-intake-controls {
+    flex-direction: row;
+  }
+
+  .ts-intake-controls-left,
+  .ts-intake-controls-right {
+    width: auto;
+  }
+
+  .ts-intake-controls-right {
+    flex-direction: row;
+  }
+
+  .ts-intake-controls-right .ts-btn,
+  .ts-intake-controls-left .ts-btn {
+    width: auto;
+  }
+}
+.audience-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg, 1.5rem);
+}
+@media (min-width: 768px) {
+  .audience-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.role-select-grid { display: grid; gap: 0.75rem; }
+.step-nav { display: flex; justify-content: space-between; margin-top: 1rem; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap;
+}

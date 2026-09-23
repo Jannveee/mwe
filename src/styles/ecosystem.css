@@ -1,0 +1,118 @@
+/* ==========================================================================
+   TeamSumit — Ecosystem Section
+   Architectural Tech Editorial aesthetic (inspired by Oréa Studio).
+   ========================================================================== */
+
+.ts-ecosystem-grid {
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .ts-ecosystem-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ts-ecosystem-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+@media (hover: hover) {
+  .ts-ecosystem-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.ts-ecosystem-card:active {
+  transform: scale(0.995);
+}
+
+.ts-ecosystem-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ts-ecosystem-monogram {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  font-family: var(--font-family-heading);
+  font-weight: 800;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+}
+
+.ts-ecosystem-card-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.ts-ecosystem-card-descriptor {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.ts-ecosystem-offerings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  flex-grow: 1;
+}
+
+.ts-ecosystem-offering {
+  position: relative;
+  padding-left: var(--space-5);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.ts-ecosystem-offering::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.ts-ecosystem-cta-row {
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.ts-ecosystem-cta {
+  width: 100%;
+  justify-content: center;
+}

@@ -1,0 +1,275 @@
+/* ==========================================================================
+   TeamSumit — About Sumit & Achievements
+   Architectural Tech Editorial aesthetic (inspired by Oréa Studio).
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------
+   ABOUT SECTION LAYOUT
+   --------------------------------------------------------------------- */
+.ts-about-layout {
+  display: grid;
+  gap: var(--space-12);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .ts-about-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+}
+
+.ts-about-paragraph {
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 60ch;
+  margin-bottom: var(--space-6);
+}
+
+.ts-about-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-10);
+}
+
+@media (min-width: 640px) {
+  .ts-about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ts-about-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-about-stat-num {
+  font-family: var(--font-family-heading);
+  font-size: clamp(2.5rem, 4vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: var(--letter-spacing-tighter);
+  color: var(--color-text-primary);
+  line-height: 0.95;
+  margin-bottom: var(--space-2);
+}
+
+.ts-about-stat-desc {
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------------------
+   TIMELINE
+   --------------------------------------------------------------------- */
+.ts-about-timeline-wrap {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.ts-timeline-heading {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-widest);
+  color: var(--color-text-muted);
+  font-weight: 700;
+  margin-bottom: var(--space-8);
+}
+
+.ts-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-left: var(--space-6);
+  border-left: 2px solid var(--color-border-subtle);
+}
+
+.ts-timeline-item {
+  position: relative;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--motion-duration-slow) var(--motion-easing-standard),
+              transform var(--motion-duration-slow) var(--motion-easing-standard);
+}
+
+.ts-timeline-item--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ts-timeline-marker {
+  position: absolute;
+  left: calc(-1 * var(--space-6) - 5px);
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-obsidian);
+  box-shadow: 0 0 0 4px var(--color-bg-base);
+}
+
+.ts-timeline-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  background: var(--color-bg-raised);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.ts-timeline-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.ts-timeline-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   ACHIEVEMENTS GRID
+   --------------------------------------------------------------------- */
+.ts-achievements-grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .ts-achievements-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ts-achievements-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ts-achievement-card {
+  opacity: 0;
+  transform: translateY(12px);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--motion-duration-slow) var(--motion-easing-standard);
+}
+
+.ts-achievement-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.ts-achievement-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ts-achievement-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ts-achievement-detail {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.ts-achievements-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.ts-achievements-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/bg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.ts-achievements-content {
+  position: relative;
+  z-index: 1;
+}
+
+.ts-about-stat-item {
+  transition: transform 0.3s var(--motion-ease-soft, ease);
+}
+.ts-about-stat-item:hover {
+  transform: translateY(-4px);
+}
+
+/* Reveal from left */
+.ts-anim-reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity var(--motion-duration-fade, 0.9s) var(--motion-ease-soft, ease),
+              transform var(--motion-duration-fade, 0.9s) var(--motion-ease-soft, ease);
+}
+.ts-anim-reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Keyword highlight */
+.ts-highlight {
+  background: none;
+  color: var(--color-obsidian, #111);
+  font-weight: 700;
+  position: relative;
+}
+.ts-highlight::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 6px;
+  background: rgba(201, 154, 71, 0.28); /* soft brass underline, matches muted palette */
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-anim-reveal-left {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}

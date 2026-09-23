@@ -1,0 +1,222 @@
+/**
+ * Pricing & Engagement Models Styles — Phase 19
+ * ---------------------------------------------------------------------
+ * Architectural Tech Editorial aesthetic (inspired by Oréa Studio).
+ * ---------------------------------------------------------------------
+ */
+
+.ts-pricing-section {
+  position: relative;
+  background: var(--color-bg-raised);
+}
+
+.ts-pricing-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 820px;
+  margin: 0 auto var(--space-8);
+  padding: var(--space-4) var(--space-5);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+}
+
+.ts-pricing-disclaimer-icon {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.ts-pricing-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.ts-pricing-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 18px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.ts-pricing-tab:hover {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.ts-pricing-tab[aria-selected="true"] {
+  background: var(--color-obsidian);
+  border-color: var(--color-obsidian);
+  color: #FFFFFF;
+}
+
+.ts-pricing-tab-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-muted);
+}
+
+.ts-pricing-tab[aria-selected="true"] .ts-pricing-tab-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.ts-pricing-audience-desc {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-8);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.ts-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .ts-pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+.ts-pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--motion-duration-base) var(--motion-easing-standard);
+}
+
+.ts-pricing-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.ts-pricing-card--popular {
+  border: 2px solid var(--color-obsidian);
+  box-shadow: var(--shadow-md);
+}
+
+.ts-pricing-card-badge {
+  position: absolute;
+  top: -12px;
+  right: var(--space-6);
+  padding: 3px 12px;
+  background: var(--color-obsidian);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-full);
+}
+
+.ts-pricing-card-header {
+  margin-bottom: var(--space-4);
+}
+
+.ts-pricing-card-name {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.ts-pricing-card-summary {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  min-height: 40px;
+}
+
+.ts-pricing-card-price-block {
+  margin: var(--space-5) 0;
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ts-pricing-card-price {
+  font-family: var(--font-family-heading);
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.ts-pricing-card-subtext {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
+
+.ts-pricing-card-features {
+  flex: 1;
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ts-pricing-card-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.ts-pricing-card-feature-icon {
+  flex-shrink: 0;
+  color: var(--color-text-primary);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.ts-pricing-card-action {
+  margin-top: auto;
+}
+
+.ts-pricing-card-btn {
+  width: 100%;
+  justify-content: center;
+}

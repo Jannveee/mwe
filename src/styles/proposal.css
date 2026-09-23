@@ -1,0 +1,385 @@
+/**
+ * Institutional Engagement Proposal Styles — Phase 18
+ * ---------------------------------------------------------------------
+ * Screen modal view + high-fidelity @media print rules for instant
+ * browser PDF generation and paper printing.
+ * ---------------------------------------------------------------------
+ */
+
+.ts-proposal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background-color: rgba(17, 18, 21, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow-y: auto;
+}
+
+.ts-proposal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 840px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.ts-proposal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ts-proposal-topbar-title {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ts-proposal-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ts-proposal-body {
+  padding: var(--space-6);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ---------------------------------------------------------------------
+   Official Document Paper Container
+   --------------------------------------------------------------------- */
+.ts-proposal-sheet {
+  background: #ffffff;
+  color: #111215;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-8);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.65;
+  box-shadow: var(--shadow-lg);
+}
+
+.ts-proposal-letterhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #111215;
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+}
+
+.ts-proposal-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.ts-proposal-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+  background: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.ts-proposal-brand-title {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #111215;
+}
+
+.ts-proposal-brand-subtitle {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-xs);
+  color: #565A67;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.ts-proposal-meta-card {
+  text-align: right;
+  font-size: var(--font-size-xs);
+  color: #565A67;
+}
+
+.ts-proposal-meta-ref {
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-weight: 700;
+  color: #111215;
+  background: #F8F5EE;
+  border: 1px solid #E2DDD4;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 4px;
+}
+
+.ts-proposal-doc-title {
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: #111215;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-2);
+}
+
+.ts-proposal-section {
+  margin-bottom: var(--space-6);
+  break-inside: avoid;
+}
+
+.ts-proposal-section-heading {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #111215;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 4px;
+}
+
+.ts-proposal-table-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-3) var(--space-6);
+}
+
+.ts-proposal-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-proposal-item-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: #838896;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ts-proposal-item-val {
+  font-size: var(--font-size-sm);
+  color: #111215;
+  font-weight: 500;
+}
+
+.ts-proposal-list {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
+  color: #565A67;
+}
+
+.ts-proposal-list li {
+  margin-bottom: var(--space-1);
+}
+
+.ts-proposal-callout {
+  background: #F8F5EE;
+  border-left: 3px solid #111215;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-top: var(--space-2);
+}
+
+.ts-proposal-callout-title {
+  font-weight: 700;
+  color: #111215;
+  margin: 0 0 4px;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ts-proposal-callout-body {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: #565A67;
+}
+
+.ts-proposal-signatures {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border-strong);
+  break-inside: avoid;
+}
+
+.ts-proposal-sign-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-proposal-sign-line {
+  width: 220px;
+  border-bottom: 1px solid #111215;
+  margin-bottom: 6px;
+}
+
+.ts-proposal-sign-name {
+  font-weight: 700;
+  color: #111215;
+  font-size: var(--font-size-xs);
+}
+
+.ts-proposal-sign-role {
+  font-size: 11px;
+  color: #838896;
+}
+
+.ts-proposal-footer-note {
+  margin-top: var(--space-6);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: 11px;
+  color: #838896;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+   MOBILE RESPONSIVE TWEAKS (<640px)
+   --------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .ts-proposal-overlay {
+    padding: var(--space-2);
+    align-items: flex-end;
+  }
+
+  .ts-proposal-dialog {
+    max-height: 94vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .ts-proposal-topbar {
+    padding: var(--space-3) var(--space-4);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .ts-proposal-topbar-actions {
+    justify-content: flex-end;
+  }
+
+  .ts-proposal-body {
+    padding: var(--space-3);
+  }
+
+  .ts-proposal-sheet {
+    padding: var(--space-4);
+  }
+
+  .ts-proposal-letterhead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .ts-proposal-meta-card {
+    text-align: left;
+  }
+
+  .ts-proposal-signatures {
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .ts-proposal-sign-block[style*="text-align: right"] {
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   PRINT STYLESHEET — Isolate the document paper for A4 / Letter PDF
+   --------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 12mm 12mm 12mm;
+  }
+
+  /* Hide everything on the page */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Make proposal overlay and sheet visible and reset positioning */
+  .ts-proposal-overlay,
+  .ts-proposal-dialog,
+  .ts-proposal-sheet,
+  .ts-proposal-sheet * {
+    visibility: visible !important;
+  }
+
+  .ts-proposal-overlay {
+    position: static !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  .ts-proposal-dialog {
+    position: static !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .ts-proposal-topbar {
+    display: none !important;
+  }
+
+  .ts-proposal-body {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .ts-proposal-sheet {
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #000000 !important;
+  }
+
+  .ts-proposal-meta-ref {
+    border: 1px solid #999 !important;
+    background: #eee !important;
+    color: #000 !important;
+  }
+}
