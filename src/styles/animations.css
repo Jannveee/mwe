@@ -1,0 +1,85 @@
+/* ==========================================================================
+   TeamSumit — Scroll-Reveal Animation Utilities
+   Triggered by .is-visible class added via useInView() IntersectionObserver.
+   Respects prefers-reduced-motion.
+   ========================================================================== */
+
+/* Duration token override — deliberately slow so scroll animations are clearly visible and elegant */
+:root {
+  --anim-duration: 1.8s;
+  --anim-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── HIDDEN STATES ──────────────────────────────────────────────────────── */
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity var(--anim-duration) var(--anim-ease),
+    transform var(--anim-duration) var(--anim-ease);
+}
+.anim-fade-down {
+  opacity: 0;
+  transform: translateY(-48px);
+  transition:
+    opacity var(--anim-duration) var(--anim-ease),
+    transform var(--anim-duration) var(--anim-ease);
+}
+.anim-fade-left {
+  opacity: 0;
+  transform: translateX(-56px);
+  transition:
+    opacity var(--anim-duration) var(--anim-ease),
+    transform var(--anim-duration) var(--anim-ease);
+}
+.anim-fade-right {
+  opacity: 0;
+  transform: translateX(56px);
+  transition:
+    opacity var(--anim-duration) var(--anim-ease),
+    transform var(--anim-duration) var(--anim-ease);
+}
+.anim-scale-in {
+  opacity: 0;
+  transform: scale(0.90);
+  transition:
+    opacity var(--anim-duration) var(--anim-ease),
+    transform var(--anim-duration) var(--anim-ease);
+}
+.anim-fade {
+  opacity: 0;
+  transition: opacity var(--anim-duration) var(--anim-ease);
+}
+
+/* ── VISIBLE STATES (added by useInView) ────────────────────────────────── */
+.anim-fade-up.is-visible,
+.anim-fade-down.is-visible,
+.anim-fade-left.is-visible,
+.anim-fade-right.is-visible,
+.anim-scale-in.is-visible { opacity: 1; transform: none; }
+.anim-fade.is-visible { opacity: 1; }
+
+/* ── STAGGER DELAYS — wider spread so each element visibly sequences ─────── */
+.anim-delay-1 { transition-delay: 0.15s; }
+.anim-delay-2 { transition-delay: 0.35s; }
+.anim-delay-3 { transition-delay: 0.55s; }
+.anim-delay-4 { transition-delay: 0.75s; }
+.anim-delay-5 { transition-delay: 1.00s; }
+
+/* Auto-stagger children */
+.anim-stagger > *:nth-child(1) { transition-delay: 0.10s; }
+.anim-stagger > *:nth-child(2) { transition-delay: 0.28s; }
+.anim-stagger > *:nth-child(3) { transition-delay: 0.46s; }
+.anim-stagger > *:nth-child(4) { transition-delay: 0.64s; }
+.anim-stagger > *:nth-child(5) { transition-delay: 0.82s; }
+.anim-stagger > *:nth-child(6) { transition-delay: 1.00s; }
+
+/* ── REDUCED MOTION ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up, .anim-fade-down, .anim-fade-left,
+  .anim-fade-right, .anim-scale-in, .anim-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

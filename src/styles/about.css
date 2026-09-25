@@ -28,44 +28,188 @@
   margin-bottom: var(--space-6);
 }
 
-.ts-about-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  padding: var(--space-8);
+/* ---------------------------------------------------------------------
+   FOUNDER SHOWCASE CARD (replaces stats grid with hero 4 portrait)
+   --------------------------------------------------------------------- */
+.ts-about-founder-card {
+  display: flex;
+  flex-direction: column;
   background: #FFFFFF;
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
   margin-bottom: var(--space-10);
+  gap: var(--space-6);
+  transition:
+    transform var(--motion-duration-base) var(--motion-easing-standard),
+    box-shadow var(--motion-duration-base) var(--motion-easing-standard),
+    border-color var(--motion-duration-base) var(--motion-easing-standard);
+  position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {
-  .ts-about-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .ts-about-founder-card {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    align-items: center;
   }
 }
 
-.ts-about-stat-item {
+.ts-about-founder-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Media wrapper for portrait */
+.ts-about-founder-media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(17, 18, 21, 0.08);
+  background: var(--color-bg-sunken);
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+
+.ts-about-founder-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.6s var(--motion-ease-soft, ease);
+}
+
+.ts-about-founder-card:hover .ts-about-founder-img {
+  transform: scale(1.04);
+}
+
+/* Floating badge over bottom of image */
+.ts-about-founder-badge {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 10px;
+  background: rgba(17, 18, 21, 0.90);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.ts-about-badge-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ts-about-badge-text {
   display: flex;
   flex-direction: column;
 }
 
-.ts-about-stat-num {
-  font-family: var(--font-family-heading);
-  font-size: clamp(2.5rem, 4vw, 3.75rem);
-  font-weight: 800;
-  letter-spacing: var(--letter-spacing-tighter);
-  color: var(--color-text-primary);
-  line-height: 0.95;
-  margin-bottom: var(--space-2);
+.ts-about-badge-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-.ts-about-stat-desc {
+.ts-about-badge-batch {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #E2DDD4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Founder info column */
+.ts-about-founder-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ts-about-founder-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-widest);
+  color: var(--color-accent-highlight);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.ts-about-founder-name {
+  font-family: var(--font-family-heading);
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  margin: 0 0 2px 0;
+  line-height: 1.2;
+}
+
+.ts-about-founder-title {
+  margin: 0;
   font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Focus bullet points */
+.ts-about-founder-focus {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.ts-about-founder-focus li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
   line-height: 1.5;
-  color: var(--color-text-muted);
-  font-weight: 500;
+}
+
+.ts-focus-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-obsidian);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* Quote pill */
+.ts-about-founder-quote {
+  margin: 0;
+  padding: 10px 14px;
+  background: var(--color-bg-base);
+  border-left: 2px solid var(--color-accent-highlight);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 11.5px;
+  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.5;
 }
 
 /* ---------------------------------------------------------------------
@@ -239,9 +383,9 @@
 /* Reveal from left */
 .ts-anim-reveal-left {
   opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity var(--motion-duration-fade, 0.9s) var(--motion-ease-soft, ease),
-              transform var(--motion-duration-fade, 0.9s) var(--motion-ease-soft, ease);
+  transform: translateX(-40px);
+  transition: opacity var(--motion-duration-fade, 1.8s) var(--motion-ease-soft, ease),
+              transform var(--motion-duration-fade, 1.8s) var(--motion-ease-soft, ease);
 }
 .ts-anim-reveal-left.is-visible {
   opacity: 1;
