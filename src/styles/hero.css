@@ -84,14 +84,15 @@
   opacity: 1;
 }
 
+/* Minimal scrim: just a soft bottom edge for clean section transition */
 .ts-hero-scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.8) 100%
+    to top,
+    rgba(248, 245, 238, 0.6) 0%,
+    rgba(248, 245, 238, 0) 25%
   );
 }
 
@@ -110,6 +111,12 @@
 
 .ts-hero-content {
   text-align: left;
+  background: rgba(248, 245, 238, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-8);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .ts-hero-meta-tag {
@@ -195,6 +202,14 @@
   }
 }
 
+/* Mobile: slightly stronger frosted panel for readability */
+@media (max-width: 768px) {
+  .ts-hero-content {
+    background: rgba(248, 245, 238, 0.8);
+    padding: var(--space-5) var(--space-6);
+  }
+}
+
 /* Divider draw animation for trust strip */
 .ts-trust-strip {
   position: relative;
@@ -220,4 +235,4 @@
 }
 .ts-trust-item:hover {
   transform: translateY(-4px);
-}
+}
