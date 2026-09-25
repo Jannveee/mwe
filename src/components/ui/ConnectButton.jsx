@@ -15,7 +15,7 @@ import { SOURCES } from '../../features/intake/constants.js'
  * supported for call sites that need different behavior.
  * ---------------------------------------------------------------------
  */
-function ConnectButton({ onClick, source = SOURCES.HOMEPAGE, className = '', size = 'base', ...rest }) {
+function ConnectButton({ children, onClick, source = SOURCES.HOMEPAGE, className = '', size = 'base', ...rest }) {
   const { openIntake } = useIntake()
   const sizeClass = size === 'lg' ? 'ts-btn--lg' : size === 'sm' ? 'ts-btn--sm' : ''
 
@@ -34,7 +34,7 @@ function ConnectButton({ onClick, source = SOURCES.HOMEPAGE, className = '', siz
       onClick={handleClick}
       {...rest}
     >
-      Connect With Sumit Sir
+      {children || 'Connect With Sumit Sir'}
     </button>
   )
 }
