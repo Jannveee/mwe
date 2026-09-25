@@ -6,11 +6,11 @@ import EcosystemButton from '../ui/EcosystemButton.jsx'
 import { useCountUp } from '../../hooks/useCountUp.js'
 
 const HERO_BG_IMAGES = [
-  { src: '/hero%202.jpeg', alt: 'TeamSumit event moment', position: 'center 15%' },
-  { src: '/hero%204.jpeg', alt: 'TeamSumit event moment', position: 'center 10%' },
-  { src: '/hero%206.jpeg', alt: 'TeamSumit event moment', position: 'center 20%' },
-  { src: '/hero%201.jpeg', alt: 'TeamSumit event moment', position: 'center' },
-  { src: '/hero%205.jpeg', alt: 'TeamSumit event moment', position: 'center 8%' },
+  { src: '/hero 2.jpeg', alt: 'TeamSumit event moment', position: 'center 15%' },
+  { src: '/hero 4.jpeg', alt: 'TeamSumit event moment', position: 'center 10%' },
+  { src: '/hero 6.jpeg', alt: 'TeamSumit event moment', position: 'center 50%' },
+  { src: '/hero 1.jpeg', alt: 'TeamSumit event moment', position: 'center' },
+  { src: '/hero 3.jpeg', alt: 'TeamSumit event moment', position: 'center 35%' },
 ]
 
 function useHeroBgCrossfade(count, intervalMs = 5500) {
@@ -28,7 +28,11 @@ const TRUST_ITEMS = [
   { label: 'Industry Aligned', value: '100%' },
 ]
 
-
+const HEADING_LINES = [
+  'Architecting the Next Era of',
+  'Technology, Education &',
+  'Venture.',
+]
 
 function Hero({ onConnectClick, onExploreClick }) {
   const activeHeroBg = useHeroBgCrossfade(HERO_BG_IMAGES.length)
@@ -58,27 +62,19 @@ function Hero({ onConnectClick, onExploreClick }) {
 
       <div className="ts-hero-grid">
         <div className="ts-hero-content">
-          <h1 className="ts-hero-title">
-            <TextEffect
-              as="span"
-              className="block"
-              preset="fade-in-blur"
-              speedReveal={1.1}
-              speedSegment={0.3}
-            >
-              Architecting the Next Era of
-            </TextEffect>
-            <TextEffect
-              as="span"
-              className="block"
-              preset="fade-in-blur"
-              delay={0.25}
-              speedReveal={1.1}
-              speedSegment={0.3}
-            >
-              Technology, Education & Venture.
-            </TextEffect>
-          </h1>
+          <div className={`ts-hero-meta-tag ts-anim-fade-up ${mounted ? 'is-visible' : ''}`} style={{ transitionDelay: '0ms' }}>
+            
+          </div>
+
+          <TextEffect
+  as="h1"
+  className="ts-hero-title"
+  preset="fade-in-blur"
+  speedReveal={1.1}
+  speedSegment={0.3}
+>
+  Architecting the Next Era of Technology, Education & Venture.
+</TextEffect>
 
           <p
             className={`ts-hero-subtitle ts-anim-fade-up ${mounted ? 'is-visible' : ''}`}
@@ -93,9 +89,7 @@ function Hero({ onConnectClick, onExploreClick }) {
             className={`ts-hero-actions ts-anim-fade-up ${mounted ? 'is-visible' : ''}`}
             style={{ transitionDelay: '740ms' }}
           >
-            <ConnectButton size="lg" onClick={onConnectClick} className="ts-btn--shine">
-              Book an Appointment &rarr;
-            </ConnectButton>
+            <ConnectButton size="lg" onClick={onConnectClick} className="ts-btn--shine" />
             <EcosystemButton size="lg" onClick={onExploreClick} className="ts-btn--fill-hover" />
           </div>
 
