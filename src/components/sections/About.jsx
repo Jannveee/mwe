@@ -1,10 +1,9 @@
 import Section from '../layout/Section.jsx'
 import Timeline from '../Timeline.jsx'
-import CircularSlider from '../circularslider.jsx'
 import { useInView } from '../../hooks/useInView.js'
 import { useCountUp } from '../../hooks/useCountUp.js'
 import { highlightText } from '../../utils/highlightText.jsx'
-import { ABOUT_BIO, ABOUT_HIGHLIGHT_TERMS, TIMELINE_MILESTONES, ACHIEVEMENTS } from '../../data/aboutContent.js'
+import { ABOUT_BIO, ABOUT_HIGHLIGHT_TERMS, TIMELINE_MILESTONES } from '../../data/aboutContent.js'
 
 const EDITORIAL_STATS = [
   { num: '10k+', desc: 'Aspiring engineers and student builders mentored.' },
@@ -13,54 +12,33 @@ const EDITORIAL_STATS = [
   { num: '100%', desc: 'Commitment to real-world engineering execution.' },
 ]
 
-// CircularSlider expects { title, meta }; ACHIEVEMENTS uses { title, detail }
-const ACHIEVEMENT_SLIDES = ACHIEVEMENTS.map((a) => ({
-  title: a.title,
-  meta: a.detail,
-}))
-
 function About() {
   return (
-    <>
-      <Section id="about" ariaLabel="About Sumit" className="ts-about-section">
-        <p className="ts-eyebrow">Philosophy &amp; Leadership</p>
-        <h2 className="ts-section-title">Engineered for Impact &amp; Innovation</h2>
+    <Section id="about" ariaLabel="About Sumit" className="ts-about-section">
+      <p className="ts-eyebrow">Philosophy &amp; Leadership</p>
+      <h2 className="ts-section-title">Engineered for Impact &amp; Innovation</h2>
 
-        <div className="ts-about-layout">
-          <div>
-            <div className="ts-about-bio">
-              {ABOUT_BIO.map((paragraph, index) => (
-                <BioParagraph key={index} text={paragraph} />
-              ))}
-            </div>
-
-            <div className="ts-about-stats-grid">
-              {EDITORIAL_STATS.map((stat, idx) => (
-                <StatItem key={idx} stat={stat} />
-              ))}
-            </div>
+      <div className="ts-about-layout">
+        <div>
+          <div className="ts-about-bio">
+            {ABOUT_BIO.map((paragraph, index) => (
+              <BioParagraph key={index} text={paragraph} />
+            ))}
           </div>
 
-          <div className="ts-about-timeline-wrap">
-            <h3 className="ts-timeline-heading">Key Milestones</h3>
-            <Timeline items={TIMELINE_MILESTONES} />
+          <div className="ts-about-stats-grid">
+            {EDITORIAL_STATS.map((stat, idx) => (
+              <StatItem key={idx} stat={stat} />
+            ))}
           </div>
         </div>
-      </Section>
 
-      <Section id="milestones" ariaLabel="Achievements" tone="base" className="ts-achievements-section">
-        <div className="ts-achievements-bg" aria-hidden="true" />
-        <div className="ts-achievements-content">
-          <p className="ts-eyebrow">Track Record</p>
-          <h2 className="ts-section-title">Verified Recognitions &amp; Milestones</h2>
-          <p className="ts-section-subtitle">
-            A track record of technological execution, hackathon innovation, and academic contributions.
-          </p>
-
-          <CircularSlider items={ACHIEVEMENT_SLIDES} radius={200} cardWidth={140} />
+        <div className="ts-about-timeline-wrap">
+          <h3 className="ts-timeline-heading">Key Milestones</h3>
+          <Timeline items={TIMELINE_MILESTONES} />
         </div>
-      </Section>
-    </>
+      </div>
+    </Section>
   )
 }
 

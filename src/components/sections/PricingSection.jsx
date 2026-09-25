@@ -1,24 +1,22 @@
-import { useState } from 'react'
 import Section from '../layout/Section.jsx'
 import { PRICING_AUDIENCES, PRICING_DISCLAIMER } from '../../data/pricingConfig.js'
 import { useIntake } from '../../features/intake/IntakeContext.jsx'
 import { SOURCES } from '../../features/intake/constants.js'
 
+/* Monogram initials that match the site's existing editorial monogram style */
+const AUDIENCE_META = {
+  college: { monogram: 'CU', descriptor: 'Campus Programs' },
+  student: { monogram: 'SL', descriptor: 'CodeElevate & Community' },
+  industry: { monogram: 'IE', descriptor: 'SuPrazo Technologies' },
+}
 
 function PricingSection() {
-  const { openIntake, selectRole, updateAnswers } = useIntake()
-  const [activeAudienceId, setActiveAudienceId] = useState('college')
+  const { openIntake, selectRole } = useIntake()
 
-  const currentAudience =
-    PRICING_AUDIENCES.find((a) => a.id === activeAudienceId) || PRICING_AUDIENCES[0]
-
-  function handleTierSelect(tier) {
-  openIntake(SOURCES.PRICING, { tierId: tier.id, role: currentAudience.role })
-  selectRole(currentAudience.role)
-  if (tier.preselect) {
-    updateAnswers(currentAudience.role, tier.preselect)
+  function handleAudienceClick(aud) {
+    openIntake(SOURCES.PRICING, { role: aud.role })
+    selectRole(aud.role)
   }
-}
 
   return (
     <Section id="pricing" ariaLabel="Engagement Models and Pricing" tone="raised" className="ts-pricing-section">
@@ -33,82 +31,57 @@ function PricingSection() {
 
       {/* Honest Disclaimer Callout */}
       <div className="ts-pricing-disclaimer" role="note" aria-label="Commercial policy disclaimer">
-        <span className="ts-pricing-disclaimer-icon" aria-hidden="true">
-          ℹ️
-        </span>
+        <span className="ts-pricing-disclaimer-icon" aria-hidden="true">ℹ️</span>
         <div>{PRICING_DISCLAIMER}</div>
       </div>
 
-      {/* Audience Tabs */}
-      <div className="ts-pricing-tabs" role="tablist" aria-label="Audience engagement tracks">
+      {/* 3 Audience Cards */}
+      <div className="ts-audience-grid" role="list" aria-label="Audience engagement tracks">
         {PRICING_AUDIENCES.map((aud) => {
-          const isSelected = aud.id === activeAudienceId
+          const meta = AUDIENCE_META[aud.id] || { monogram: '??', descriptor: '' }
           return (
-            <button
+            <article
               key={aud.id}
-              type="button"
-              role="tab"
-              id={`pricing-tab-${aud.id}`}
-              aria-selected={isSelected}
-              aria-controls={`pricing-panel-${aud.id}`}
-              className="ts-pricing-tab"
-              onClick={() => setActiveAudienceId(aud.id)}
+              className="ts-audience-card"
+              role="listitem"
+              aria-label={aud.label}
             >
-              <span>{aud.label}</span>
-              <span className="ts-pricing-tab-badge">{aud.badge}</span>
-            </button>
+              {/* Card header — matches ecosystem card style */}
+              <div className="ts-audience-card__header">
+                <span className="ts-audience-monogram" aria-hidden="true">
+                  {meta.monogram}
+                </span>
+                <div>
+                  <h3 className="ts-audience-card__title">{aud.label}</h3>
+                  <p className="ts-audience-card__descriptor">{meta.descriptor}</p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="ts-audience-card__desc">{aud.description}</p>
+
+              {/* Tiers list — dash style matching ecosystem offerings */}
+              <ul className="ts-audience-card__tiers">
+                {aud.tiers.map((tier) => (
+                  <li key={tier.id} className="ts-audience-card__tier">
+                    {tier.name}
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <div className="ts-audience-card__action">
+                <button
+                  type="button"
+                  className="ts-btn ts-btn--primary ts-audience-card__btn"
+                  onClick={() => handleAudienceClick(aud)}
+                >
+                  Explore Track &rarr;
+                </button>
+              </div>
+            </article>
           )
         })}
-      </div>
-
-      <p className="ts-pricing-audience-desc">{currentAudience.description}</p>
-
-      {/* Tiers Grid */}
-      <div
-        id={`pricing-panel-${currentAudience.id}`}
-        role="tabpanel"
-        aria-labelledby={`pricing-tab-${currentAudience.id}`}
-        className="ts-pricing-grid"
-      >
-        {currentAudience.tiers.map((tier) => (
-          <div
-            key={tier.id}
-            className={`ts-pricing-card ${tier.isPopular ? 'ts-pricing-card--popular' : ''}`}
-          >
-            {tier.badge && <span className="ts-pricing-card-badge">{tier.badge}</span>}
-
-            <div className="ts-pricing-card-header">
-              <h3 className="ts-pricing-card-name">{tier.name}</h3>
-              <p className="ts-pricing-card-summary">{tier.summary}</p>
-            </div>
-
-            <div className="ts-pricing-card-price-block">
-              <div className="ts-pricing-card-price">{tier.priceDisplay}</div>
-              <span className="ts-pricing-card-subtext">{tier.priceSubtext}</span>
-            </div>
-
-            <ul className="ts-pricing-card-features">
-              {tier.deliverables.map((feature, idx) => (
-                <li key={idx} className="ts-pricing-card-feature-item">
-                  <span className="ts-pricing-card-feature-icon" aria-hidden="true">
-                    ✓
-                  </span>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="ts-pricing-card-action">
-              <button
-                type="button"
-                className={`ts-btn ${tier.isPopular ? 'ts-btn--primary' : 'ts-btn--secondary'} ts-pricing-card-btn`}
-                onClick={() => handleTierSelect(tier)}
-              >
-                {tier.ctaText} &rarr;
-              </button>
-            </div>
-          </div>
-        ))}
       </div>
     </Section>
   )

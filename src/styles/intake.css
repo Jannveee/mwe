@@ -150,6 +150,41 @@
   margin-left: auto;
 }
 
+/* ← Arrow back button */
+.ts-intake-back-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-strong);
+  background: #FFFFFF;
+  color: var(--color-text-primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.ts-intake-back-arrow:hover:not(:disabled) {
+  background: var(--color-bg-raised);
+  border-color: var(--color-text-primary);
+  transform: translateX(-2px);
+}
+
+.ts-intake-back-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ts-intake-back-arrow:focus-visible {
+  outline: 2px solid var(--color-obsidian);
+  outline-offset: 3px;
+}
+
 /* ---------------------------------------------------------------------
    QUESTIONNAIRE FORM FIELDS — shared by SelectField / TextAreaField
    --------------------------------------------------------------------- */

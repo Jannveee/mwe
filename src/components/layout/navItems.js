@@ -10,7 +10,6 @@
 export const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
   { label: 'About Sumit', href: '#about' },
-  { label: 'Achievements', href: '#achievements' },
   { label: 'Ecosystem', href: '#ecosystem' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Connect', href: '#connect' },

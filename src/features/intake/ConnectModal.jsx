@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import { useIntake } from './IntakeContext.jsx'
 import { STEPS } from './constants.js'
 import ModalShell from './components/ModalShell.jsx'
@@ -18,25 +19,43 @@ const STEP_TITLES = {
   [STEPS.SUCCESS]: 'Request received',
 }
 
-/**
- * ConnectModal
- * ---------------------------------------------------------------------
- * Mounted exactly once (in Layout, alongside <IntakeProvider>). Reads
- * all state from useIntake() and renders nothing when closed, so
- * mounting it doesn't affect the page when the modal isn't in use.
- *
- * This is the only component that knows the mapping from wizard step
- * → which step component to render — everything below it (RoleSelect,
- * QuestionnaireRouter, etc.) is presentational/self-contained.
- * ---------------------------------------------------------------------
- */
 function ConnectModal() {
-  const { state, derived, closeIntake, cancelIntake, selectRole, goNext, goBack, restart } =
+  const { state, derived, closeIntake, cancelIntake, selectRole, goNext, goBack } =
     useIntake()
+
+  const questionnaireRef = useRef(null)
+  // Track canSubNext in state so parent re-renders when child value changes
+  const [canSubNext, setCanSubNext] = useState(false)
 
   function handleSelectRole(roleId) {
     selectRole(roleId)
   }
+
+  // Reset canSubNext when leaving the questionnaire step
+  const isQuestionnaire = state.step === STEPS.QUESTIONNAIRE
+  function handleNext() {
+    if (state.step === STEPS.QUESTIONNAIRE && questionnaireRef.current) {
+      questionnaireRef.current.goSubNext()
+    } else {
+      goNext()
+    }
+  }
+
+  function handleBack() {
+    if (state.step === STEPS.QUESTIONNAIRE && questionnaireRef.current) {
+      const { isFirstSubStep } = questionnaireRef.current
+      if (isFirstSubStep) {
+        goBack() // back to ROLE step
+      } else {
+        questionnaireRef.current.goSubBack()
+      }
+    } else {
+      goBack()
+    }
+  }
+
+  // Is the Next button enabled? Use state (updated by child callback) for questionnaire step
+  const computedCanGoNext = state.step === STEPS.QUESTIONNAIRE ? canSubNext : derived.canGoNext
 
   function renderStep() {
     switch (state.step) {
@@ -49,7 +68,14 @@ function ConnectModal() {
           />
         )
       case STEPS.QUESTIONNAIRE:
-        return <QuestionnaireRouter role={state.role} descriptionId={DESCRIPTION_ID} />
+        return (
+          <QuestionnaireRouter
+            ref={questionnaireRef}
+            role={state.role}
+            descriptionId={DESCRIPTION_ID}
+            onCanSubNextChange={setCanSubNext}
+          />
+        )
       case STEPS.REVIEW:
         return <ReviewStep role={state.role} answers={state.answers} descriptionId={DESCRIPTION_ID} />
       case STEPS.SUCCESS:
@@ -72,15 +98,17 @@ function ConnectModal() {
       {renderStep()}
 
       <ModalControls
-  step={state.step}
-  canGoBack={derived.canGoBack}
-  onBack={goBack}
-  onCancel={cancelIntake}
-  onRestart={restart}
-  onClose={closeIntake}
-/>
+        step={state.step}
+        canGoBack={derived.canGoBack || state.step === STEPS.QUESTIONNAIRE}
+        canGoNext={computedCanGoNext}
+        onNext={handleNext}
+        onBack={handleBack}
+        onCancel={cancelIntake}
+        onClose={closeIntake}
+      />
     </ModalShell>
   )
+
 }
 
 export default ConnectModal
