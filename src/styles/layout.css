@@ -26,15 +26,24 @@
 /* ---------------------------------------------------------------------
    HEADER
    --------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+   HEADER (Modern Glass Architecture)
+   --------------------------------------------------------------------- */
 .ts-header {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky-header);
-  background: var(--glass-bg);
-  border-bottom: 1px solid var(--color-border-subtle);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: background var(--motion-duration-base) ease;
+  background: rgba(248, 245, 238, 0.82);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ts-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .ts-header-inner {
@@ -42,31 +51,37 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  padding-block: var(--space-4);
+  padding-block: 14px;
+  transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ts-header.is-scrolled .ts-header-inner {
+  padding-block: 10px;
 }
 
 .ts-logo {
   font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-extrabold);
-  font-size: 1.35rem;
+  font-weight: 800;
+  font-size: 1.25rem;
   color: var(--color-text-primary);
-  letter-spacing: var(--letter-spacing-tighter);
+  letter-spacing: var(--letter-spacing-tight);
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 10px;
+  transition: opacity 0.2s ease;
 }
 
 .ts-logo-img {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background: #FFFFFF;
   flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--motion-duration-fast) ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
 }
 
 .ts-logo-text {
@@ -75,11 +90,11 @@
 }
 
 .ts-logo-dot {
-  color: var(--color-accent-highlight);
+  color: #EAB308;
 }
 
 .ts-logo:hover .ts-logo-img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .ts-logo:hover {
@@ -93,41 +108,51 @@
 }
 
 /* ---------------------------------------------------------------------
-   DESKTOP NAV
+   DESKTOP NAV (Segmented Dock Capsule)
    --------------------------------------------------------------------- */
 .ts-nav--desktop {
   display: none;
 }
 
+.ts-nav-capsule {
+  background: rgba(0, 0, 0, 0.038);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-full);
+  padding: 3px 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
 .ts-nav-list {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .ts-nav-link {
   position: relative;
   font-family: var(--font-family-heading);
-  font-size: var(--font-size-xs);
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   color: var(--color-text-secondary);
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   text-decoration: none !important;
-  transition: all var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: all 0.2s ease;
 }
 
 .ts-nav-link:hover {
   color: var(--color-text-primary);
-  background: rgba(17, 18, 21, 0.05);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .ts-nav-link[aria-current='page'] {
   color: var(--color-text-primary);
   background: #FFFFFF;
-  border: 1px solid var(--color-border-subtle);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .ts-nav-link:focus-visible {
@@ -336,139 +361,153 @@
 }
 
 /* ---------------------------------------------------------------------
-   MONUMENTAL FOOTER (Oréa Studio Inspired)
+   DARK EDITORIAL FOOTER (Reference Recreated)
    --------------------------------------------------------------------- */
 .ts-footer {
-  border-top: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-base);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #141311;
+  color: #EDE8DF;
   padding-top: var(--space-16);
-  padding-bottom: var(--space-10);
+  padding-bottom: var(--space-8);
   overflow: hidden;
 }
 
-.ts-footer-top {
+.ts-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr;
+  gap: var(--space-10);
+  margin-bottom: var(--space-12);
+  align-items: start;
+}
+
+/* Column 1: Brand & Bio */
+.ts-footer-col--brand {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-8);
-  margin-bottom: var(--space-12);
-}
-
-@media (min-width: 768px) {
-  .ts-footer-top {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-}
-
-.ts-footer-statement {
-  max-width: 460px;
-}
-
-.ts-footer-brand-lockup {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-4);
-}
-
-.ts-footer-logo-img {
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid var(--color-border-subtle);
-  background: #FFFFFF;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
 }
 
 .ts-footer-brand-title {
-  font-family: var(--font-family-heading);
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: var(--letter-spacing-tight);
-  color: var(--color-text-primary);
-}
-
-.ts-footer-desc {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-md);
-  font-weight: 600;
-  line-height: 1.5;
-  color: var(--color-text-secondary);
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: 2.2rem;
+  font-weight: 500;
   letter-spacing: -0.01em;
-  margin: 0 0 var(--space-4);
+  color: #F7F4EE;
+  margin-bottom: var(--space-4);
+  line-height: 1;
 }
 
-.ts-footer-email-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  text-decoration: none !important;
-  font-family: var(--font-family-mono);
-  border-bottom: 1px solid var(--color-border-strong);
-  padding-bottom: 2px;
-  transition: all var(--motion-duration-fast) ease;
-}
-.ts-footer-email-link:hover {
-  color: var(--color-text-primary);
-  border-color: var(--color-text-primary);
+.ts-footer-brand-dot {
+  color: #EAB308;
 }
 
-.ts-footer-nav-group {
+.ts-footer-bio {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #8C867B;
+  max-width: 320px;
+  margin: 0 0 var(--space-6);
+}
+
+.ts-footer-social-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 10px;
+  align-items: center;
 }
 
-.ts-footer-pill-link {
+.ts-footer-icon-btn {
   display: inline-flex;
   align-items: center;
-  padding: 6px 16px;
-  border-radius: var(--radius-full);
-  background: #FFFFFF;
-  border: 1px solid var(--color-border-subtle);
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9C968B;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.ts-footer-icon-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Column Headings */
+.ts-footer-col-title {
+  font-family: var(--font-family-body, sans-serif);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-primary);
+  letter-spacing: 0.16em;
+  color: #8A847A;
+  margin: 0 0 var(--space-5);
+}
+
+/* Link Lists */
+.ts-footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.ts-footer-link {
+  font-size: 0.875rem;
+  color: #C2BCB2;
   text-decoration: none !important;
-  transition: all var(--motion-duration-fast) ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
-.ts-footer-pill-link:hover {
-  background: var(--color-obsidian);
+
+.ts-footer-link:hover {
   color: #FFFFFF;
-  border-color: var(--color-obsidian);
+  transform: translateX(2px);
 }
 
-/* Giant Display Wordmark across footer */
-.ts-footer-giant-wordmark {
-  margin: var(--space-8) 0;
-  font-family: var(--font-family-heading);
-  font-size: clamp(3.5rem, 13vw, 9.5rem);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 0.88;
-  color: var(--color-text-primary);
-  user-select: none;
+/* Contact List */
+.ts-footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
+.ts-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: #C2BCB2;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+a.ts-footer-contact-item:hover {
+  color: #FFFFFF;
+}
+
+.ts-footer-contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #EAB308;
+  flex-shrink: 0;
+}
+
+/* Bottom Bar */
 .ts-footer-bottom-bar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-4);
   padding-top: var(--space-6);
-  border-top: 1px solid var(--color-border-subtle);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: #78736A;
 }
 
 @media (min-width: 768px) {
@@ -478,16 +517,31 @@
   }
 }
 
-.ts-footer-socials {
-  display: flex;
-  gap: var(--space-4);
+.ts-footer-copyright {
+  color: #78736A;
+  letter-spacing: 0.01em;
 }
 
-.ts-footer-social-item {
-  color: var(--color-text-secondary);
-  text-decoration: none !important;
-  transition: color var(--motion-duration-fast) ease;
+.ts-footer-credits {
+  color: #78736A;
 }
-.ts-footer-social-item:hover {
-  color: var(--color-text-primary);
+
+.ts-footer-author {
+  color: #EAB308;
+  font-weight: 600;
+}
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+  .ts-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .ts-footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
 }

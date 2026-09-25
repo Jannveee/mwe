@@ -23,8 +23,19 @@ function Header() {
   const { openIntake } = useIntake()
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeHref, setActiveHref] = useState('#home')
+  const [scrolled, setScrolled] = useState(false)
   const toggleButtonRef = useRef(null)
   const menuId = 'primary-mobile-nav'
+
+  // Detect scroll to apply compact elevated glass styling
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 15)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Close mobile menu on Escape, return focus to the toggle button.
   useEffect(() => {
@@ -41,9 +52,7 @@ function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [menuOpen])
 
-  // Track which section is currently in view to drive the active nav
-  // state. Falls back gracefully (no crash) if sections don't exist
-  // yet on the page.
+  // Track which section is currently in view to drive the active nav state
   useEffect(() => {
     const sectionIds = NAV_ITEMS.map((item) => item.href.replace('#', ''))
     const sections = sectionIds
@@ -74,7 +83,7 @@ function Header() {
   }
 
   return (
-    <header className="ts-header">
+    <header className={`ts-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="ts-header-inner ts-container">
         <a href="#home" className="ts-logo" aria-label="TeamSumit — home">
           <img
@@ -91,24 +100,28 @@ function Header() {
 
         {/* Desktop navigation */}
         <nav className="ts-nav ts-nav--desktop" aria-label="Primary">
-          <ul className="ts-nav-list">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="ts-nav-link"
-                  aria-current={activeHref === item.href ? 'page' : undefined}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="ts-nav-capsule">
+            <ul className="ts-nav-list">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="ts-nav-link"
+                    aria-current={activeHref === item.href ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
 
         <div className="ts-header-actions">
           <div className="ts-header-cta">
-            <ConnectButton size="sm" source="header" />
+            <ConnectButton size="sm" source="header">
+              Connect With Sumit Sir
+            </ConnectButton>
           </div>
 
           {/* Mobile menu toggle */}

@@ -58,19 +58,27 @@ function Hero({ onConnectClick, onExploreClick }) {
 
       <div className="ts-hero-grid">
         <div className="ts-hero-content">
-          <div className={`ts-hero-meta-tag ts-anim-fade-up ${mounted ? 'is-visible' : ''}`} style={{ transitionDelay: '0ms' }}>
-            
-          </div>
-
-          <TextEffect
-  as="h1"
-  className="ts-hero-title"
-  preset="fade-in-blur"
-  speedReveal={1.1}
-  speedSegment={0.3}
->
-  Architecting the Next Era of Technology, Education & Venture.
-</TextEffect>
+          <h1 className="ts-hero-title">
+            <TextEffect
+              as="span"
+              className="block"
+              preset="fade-in-blur"
+              speedReveal={1.1}
+              speedSegment={0.3}
+            >
+              Architecting the Next Era of
+            </TextEffect>
+            <TextEffect
+              as="span"
+              className="block"
+              preset="fade-in-blur"
+              delay={0.25}
+              speedReveal={1.1}
+              speedSegment={0.3}
+            >
+              Technology, Education & Venture.
+            </TextEffect>
+          </h1>
 
           <p
             className={`ts-hero-subtitle ts-anim-fade-up ${mounted ? 'is-visible' : ''}`}
@@ -85,7 +93,9 @@ function Hero({ onConnectClick, onExploreClick }) {
             className={`ts-hero-actions ts-anim-fade-up ${mounted ? 'is-visible' : ''}`}
             style={{ transitionDelay: '740ms' }}
           >
-            <ConnectButton size="lg" onClick={onConnectClick} className="ts-btn--shine" />
+            <ConnectButton size="lg" onClick={onConnectClick} className="ts-btn--shine">
+              Book an Appointment &rarr;
+            </ConnectButton>
             <EcosystemButton size="lg" onClick={onExploreClick} className="ts-btn--fill-hover" />
           </div>
 
