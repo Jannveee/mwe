@@ -16,39 +16,50 @@
  * ---------------------------------------------------------------------
  */
 function EcosystemCard({ entity, cardId, onCtaClick }) {
-  const { id, name, monogram, descriptor, offerings, ctaLabel } = entity
+  const { id, name, descriptor, offerings, ctaLabel } = entity
   const headingId = `ecosystem-card-${id}-heading`
 
   return (
-    <article id={cardId || id} className="ts-glass ts-ecosystem-card" aria-labelledby={headingId}>
-      <div className="ts-ecosystem-card-header">
-        <span className="ts-ecosystem-monogram" aria-hidden="true">
-          {monogram}
-        </span>
-        <div>
+    <article
+      id={cardId || id}
+      className={`ts-ecosystem-card ts-ecosystem-card--${id}`}
+      aria-labelledby={headingId}
+    >
+      <div className="ts-ecosystem-card-top-bar" />
+      <div className="ts-ecosystem-card-inner">
+        <div className="ts-ecosystem-card-header">
           <h3 id={headingId} className="ts-ecosystem-card-title">
             {name}
           </h3>
           <p className="ts-ecosystem-card-descriptor">{descriptor}</p>
         </div>
-      </div>
 
-      <ul className="ts-ecosystem-offerings">
-        {offerings.map((offering) => (
-          <li key={offering} className="ts-ecosystem-offering">
-            {offering}
-          </li>
-        ))}
-      </ul>
+        <ul className="ts-ecosystem-offerings">
+          {offerings.map((offering) => (
+            <li key={offering} className="ts-ecosystem-offering">
+              <span className="ts-offering-bullet" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <span className="ts-offering-text">{offering}</span>
+            </li>
+          ))}
+        </ul>
 
-      <div className="ts-ecosystem-cta-row">
-        <button
-          type="button"
-          className="ts-btn ts-btn--secondary ts-ecosystem-cta"
-          onClick={() => onCtaClick?.(id)}
-        >
-          {ctaLabel}
-        </button>
+        <div className="ts-ecosystem-cta-row">
+          <button
+            type="button"
+            className="ts-btn ts-btn--secondary ts-ecosystem-cta"
+            onClick={() => onCtaClick?.(id)}
+          >
+            <span>{ctaLabel}</span>
+            <svg className="ts-cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </div>
       </div>
     </article>
   )

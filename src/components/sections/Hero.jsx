@@ -63,7 +63,7 @@ function Hero({ onConnectClick, onExploreClick }) {
       <div className="ts-hero-grid">
         <div className="ts-hero-content">
           <div className={`ts-hero-meta-tag ts-anim-fade-up ${mounted ? 'is-visible' : ''}`} style={{ transitionDelay: '0ms' }}>
-            
+            AI Builder & Engineering Mentor
           </div>
 
           <TextEffect

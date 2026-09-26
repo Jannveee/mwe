@@ -25,12 +25,12 @@ function TimelineItem({ item, index }) {
   return (
     <li
       ref={ref}
-      className={`ts-timeline-item ${isInView ? 'ts-timeline-item--visible' : ''}`}
+      className={`ts-timeline-item ${isInView ? 'ts-timeline-item--visible' : ''} ${index === 0 ? 'ts-timeline-item--latest' : ''}`}
       style={{ transitionDelay: `${Math.min(index, 4) * 80}ms` }}
     >
       <div className="ts-timeline-marker" aria-hidden="true" />
       <div className="ts-timeline-content">
-        <p className="ts-badge ts-badge--secondary ts-timeline-badge">{item.marker}</p>
+        <span className="ts-timeline-badge">{item.marker}</span>
         <h3 className="ts-timeline-title">{item.title}</h3>
         <p className="ts-timeline-description">{item.description}</p>
       </div>
