@@ -191,9 +191,9 @@
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  background: var(--color-obsidian, #111215);
+  background: #111215 !important;
   color: #FFFFFF !important;
-  border: 1px solid var(--color-obsidian, #111215);
+  border: 1px solid #111215 !important;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 14px rgba(17, 18, 21, 0.2);
@@ -201,15 +201,21 @@
 
 .ts-cta-arrow {
   transition: transform 0.2s ease;
+  color: #FFFFFF !important;
 }
 
-.ts-ecosystem-cta:hover {
-  background: #1C1E24;
-  border-color: #1C1E24;
-  box-shadow: 0 8px 22px rgba(17, 18, 21, 0.28);
+.ts-ecosystem-cta:hover,
+.ts-ecosystem-cta:hover:not(:disabled),
+.ts-ecosystem-cta:focus-visible {
+  background: #202228 !important;
+  border-color: #202228 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(17, 18, 21, 0.35);
+  transform: translateY(-2px);
 }
 
-.ts-ecosystem-cta:hover .ts-cta-arrow {
+.ts-ecosystem-cta:hover .ts-cta-arrow,
+.ts-ecosystem-cta:hover:not(:disabled) .ts-cta-arrow {
   transform: translateX(5px);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }

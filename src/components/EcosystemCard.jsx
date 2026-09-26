@@ -50,7 +50,7 @@ function EcosystemCard({ entity, cardId, onCtaClick }) {
         <div className="ts-ecosystem-cta-row">
           <button
             type="button"
-            className="ts-btn ts-btn--secondary ts-ecosystem-cta"
+            className="ts-btn ts-ecosystem-cta"
             onClick={() => onCtaClick?.(id)}
           >
             <span>{ctaLabel}</span>
