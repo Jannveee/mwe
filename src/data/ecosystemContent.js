@@ -47,7 +47,7 @@ export const ECOSYSTEM_ENTITIES = [
     monogram: 'SC',
     descriptor: 'Hackathons and innovation ecosystem',
     offerings: [
-      'National-level hackathons',
+      'National/International-level hackathons',
       'Innovation challenges',
       'Institutional participation',
       'Event partnerships',

@@ -53,7 +53,7 @@ function FounderShowcaseCard() {
       <div className="ts-about-founder-media">
         <img
           src="/hero 4.jpeg"
-          alt="Sumit Waghmare — Best Engineer & Gold Medalist"
+          alt="Sumit Waghmare — India's Youngest Organizer"
           className="ts-about-founder-img"
           loading="lazy"
         />
@@ -64,7 +64,7 @@ function FounderShowcaseCard() {
             </svg>
           </span>
           <div className="ts-about-badge-text">
-            <span className="ts-about-badge-title">Best Engineer · Gold Medalist</span>
+            <span className="ts-about-badge-title">India's Youngest Organizer · Gold Medalist</span>
             <span className="ts-about-badge-batch">Graduating Batch 2022–2026</span>
           </div>
         </div>
@@ -104,7 +104,7 @@ function FounderShowcaseCard() {
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
-            <span>High-Velocity National Hackathons &amp; Campus Innovation</span>
+            <span>High-Velocity National/International Hackathons &amp; Campus Innovation</span>
           </li>
         </ul>
 

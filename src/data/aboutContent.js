@@ -2,6 +2,7 @@
  * About Sumit & Achievements — content data
  */
 
+
 export const ABOUT_BIO = [
   'Sumit Waghmare is a technology entrepreneur from India and the Director of SuPrazo Technologies. He is passionate about artificial intelligence and focuses on building products that automate operations, reduce costs, and improve productivity.',
 ]
@@ -34,7 +35,7 @@ export const TIMELINE_MILESTONES = [
   {
     id: 'judge-speaker',
     marker: 'Age 21',
-    title: 'National-level judge, speaker & judge at colleges',
+    title: 'National/International-level judge, speaker & judge at colleges',
     description:
       'Served as a national-level judge for technical competitions and innovation events, and was invited as a speaker and judge at colleges across India.',
   },
