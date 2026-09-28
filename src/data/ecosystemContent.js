@@ -14,7 +14,7 @@
 export const ECOSYSTEM_ENTITIES = [
   {
     id: 'suprazo',
-    name: 'SuPrazo Technologies',
+    name: 'Comprehensive IT Solutions',
     monogram: 'SP',
     descriptor: 'AI-First Hybrid IT',
     offerings: [
@@ -29,7 +29,7 @@ export const ECOSYSTEM_ENTITIES = [
   },
   {
     id: 'codeelevate',
-    name: 'CodeElevate Academy',
+    name: 'Educational Services & Training',
     monogram: 'CE',
     descriptor: 'Practical technology education and training',
     offerings: [
@@ -43,7 +43,7 @@ export const ECOSYSTEM_ENTITIES = [
   },
   {
     id: 'suprathon',
-    name: 'SuPrathon Community',
+    name: 'Innovation Community Services',
     monogram: 'SC',
     descriptor: 'Hackathons and innovation ecosystem',
     offerings: [
