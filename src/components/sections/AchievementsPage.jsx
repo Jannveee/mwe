@@ -239,16 +239,7 @@ function AchievementsPage({ onBackToMain }) {
   return (
     <div className="ts-achievements-page">
       <div className="ts-container">
-        {/* Top bar with Back Button & Breadcrumbs — only top return button */}
-        <nav className="ts-achievements-topbar" aria-label="Page navigation">
-         
-
-          <div className="ts-achievements-breadcrumb" aria-label="Breadcrumb">
-            <span>Home</span>
-            <span className="ts-breadcrumb-sep" aria-hidden="true">/</span>
-            <span className="ts-breadcrumb-item--active">Achievements</span>
-          </div>
-        </nav>
+        
 
         {/* -------------------------------------------------------------
             SECTION 1: MILESTONES & NUMBERS SECTION (Showcase Panel)
