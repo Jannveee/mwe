@@ -56,7 +56,7 @@ export function validateStudentAnswers(answers = {}) {
     errors.careerObjective = 'Share a brief career objective (at least 3 characters).'
   }
   if (!isNonEmptyText(answers.guidanceQuestion, 5)) {
-    errors.guidanceQuestion = 'Add your question for Sumit Sir (at least 5 characters).'
+    errors.guidanceQuestion = 'Add your question for Sumit (at least 5 characters).'
   }
 
   return errors

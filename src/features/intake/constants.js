@@ -17,7 +17,7 @@ export const SOURCES = {
 };
 
 export const STEP_LABELS = {
-  role: "Who's connecting with Sumit Sir?",
+  role: "Who's connecting with Sumit ?",
   questionnaire: 'Tell us more',
   review: 'Review your details',
   success: 'Request received',

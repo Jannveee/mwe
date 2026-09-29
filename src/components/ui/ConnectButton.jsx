@@ -4,7 +4,7 @@ import { SOURCES } from '../../features/intake/constants.js'
 /**
  * ConnectButton
  * ---------------------------------------------------------------------
- * The single, reused "Connect With Sumit Sir" primary CTA. Used in the
+ * The single, reused "Connect With Sumit " primary CTA. Used in the
  * header and footer so the action stays visually and behaviorally
  * consistent everywhere it appears.
  *
@@ -34,7 +34,7 @@ function ConnectButton({ children, onClick, source = SOURCES.HOMEPAGE, className
       onClick={handleClick}
       {...rest}
     >
-      {children || 'Connect With Sumit Sir'}
+      {children || 'Connect With Sumit'}
     </button>
   )
 }

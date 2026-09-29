@@ -9,8 +9,16 @@
  * + Bottom copyright & credits bar
  * ---------------------------------------------------------------------
  */
-function Footer() {
+function Footer({ onOpenAchievements }) {
   const year = new Date().getFullYear()
+
+  function handleAchievementsClick(subAnchor) {
+    if (onOpenAchievements) {
+      onOpenAchievements(subAnchor)
+    } else {
+      window.location.hash = subAnchor ? `#${subAnchor}` : '#achievements'
+    }
+  }
 
   return (
     <footer className="ts-footer">
@@ -19,7 +27,7 @@ function Footer() {
           {/* Column 1: Brand, Bio & Socials */}
           <div className="ts-footer-col ts-footer-col--brand">
             <div className="ts-footer-brand-title">
-              TeamSumit<span className="ts-footer-brand-dot">.</span>
+              Team Sumit<span className="ts-footer-brand-dot">.</span>
             </div>
             <p className="ts-footer-bio">
               Building SuPrazo Technologies, CodeElevate, and Team Sumit. A 21-year-old founder from Nagpur with a world record and a long way to go.
@@ -81,10 +89,25 @@ function Footer() {
             <ul className="ts-footer-link-list">
               <li><a href="#about" className="ts-footer-link">About</a></li>
               <li><a href="#ecosystem" className="ts-footer-link">Services</a></li>
-              <li><a href="#achievements" className="ts-footer-link">Achievements</a></li>
-              <li><a href="#about" className="ts-footer-link">Gallery</a></li>
-              <li><a href="#achievements" className="ts-footer-link">Testimonials</a></li>
-              <li><a href="#connect" className="ts-footer-link">FAQ</a></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleAchievementsClick('milestones')}
+                  className="ts-footer-link ts-footer-link--btn"
+                  aria-label="View Achievements"
+                >
+                  Achievements
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleAchievementsClick('gallery')}
+                  className="ts-footer-link ts-footer-link--btn"
+                  aria-label="View Moments Gallery"
+                >
+                </button>
+              </li>
             </ul>
           </div>
 

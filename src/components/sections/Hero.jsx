@@ -6,10 +6,10 @@ import EcosystemButton from '../ui/EcosystemButton.jsx'
 import { useCountUp } from '../../hooks/useCountUp.js'
 
 const HERO_BG_IMAGES = [
-  { src: '/hero 2.jpeg', alt: 'TeamSumit event moment', position: 'center 15%' },
+  { src: '/hero 2.jpeg', alt: 'TeamSumit event moment', position: 'center 01%' },
   { src: '/hero 4.jpeg', alt: 'TeamSumit event moment', position: 'center 10%' },
-  { src: '/hero 6.jpeg', alt: 'TeamSumit event moment', position: 'center 50%' },
-  { src: '/hero 1.jpeg', alt: 'TeamSumit event moment', position: 'center' },
+  { src: '/hero 6.jpeg', alt: 'TeamSumit event moment', position: 'center 40%' },
+  { src: '/hero 1.jpeg', alt: 'TeamSumit event moment', position: 'center 02%' },
   { src: '/hero 3.jpeg', alt: 'TeamSumit event moment', position: 'center 35%' },
 ]
 
@@ -81,7 +81,7 @@ function Hero({ onConnectClick, onExploreClick }) {
             style={{ transitionDelay: '620ms' }}
           >
             Sumit Waghmare is an AI builder, technology founder, and engineering mentor.
-            TeamSumit bridges learners, colleges, startups, and enterprises with
+            Team Sumit bridges learners, colleges, startups, and enterprises with
             real-world innovation, practical education, and systems architecture.
           </p>
 

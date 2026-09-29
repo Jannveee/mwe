@@ -1,7 +1,7 @@
 /**
  * EcosystemCard
  * ---------------------------------------------------------------------
- * Reusable card for one TeamSumit ecosystem entity (SuPrazo
+ * Reusable card for one Team Sumit ecosystem entity (SuPrazo
  * Technologies / CodeElevate Academy / SuPrathon Community).
  *
  * The CTA is intentionally a separate, clearly-focusable <button> (not

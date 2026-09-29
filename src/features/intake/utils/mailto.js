@@ -32,7 +32,7 @@ export function buildEmailDraft(role, answers = {}, source = 'homepage') {
   const reasonTitle = reasonLabel(role, reason);
 
   const subject = `[TeamSumit Inquiry] ${roleTitle} — ${reasonTitle}`;
-  const body = `Hello Sumit Sir & Team,
+  const body = `Hello Sumit & Team,
 
 I would like to connect through TeamSumit.
 

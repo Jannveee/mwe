@@ -13,7 +13,7 @@ const TITLE_ID = 'intake-modal-title'
 const DESCRIPTION_ID = 'intake-modal-description'
 
 const STEP_TITLES = {
-  [STEPS.ROLE]: "Who's connecting with Sumit Sir?",
+  [STEPS.ROLE]: "Who's connecting with Sumit?",
   [STEPS.QUESTIONNAIRE]: 'Tell us more',
   [STEPS.REVIEW]: 'Review your details',
   [STEPS.SUCCESS]: 'Request received',

@@ -26,11 +26,11 @@ export const PRICING_AUDIENCES = [
         priceSubtext: 'Per Institutional Guidelines',
         summary: 'Inspiring keynote address for university symposiums, orientations, or tech fests.',
         deliverables: [
-          'Keynote session by Sumit Sir on Emerging Tech, AI, & Career Horizons',
+          'Keynote session by Sumit on Emerging Tech, AI, & Career Horizons',
           'Interactive Q&A forum with students and department faculty',
           'Pre-event coordination with student organizing committee',
         ],
-        ctaText: 'Invite Sumit Sir',
+        ctaText: 'Invite Sumit ',
         preselect: { reason: 'guest-lecture' },
       },
       {
@@ -81,7 +81,7 @@ export const PRICING_AUDIENCES = [
         priceSubtext: 'Per Session',
         summary: 'Personalized 1:1 career guidance and roadmap planning.',
         deliverables: [
-          'Personalized 1:1 consultation session with Sumit Sir',
+          'Personalized 1:1 consultation session with Sumit ',
           'Detailed career pathway and tech stack audit',
         ],
         ctaText: 'Book Career Guidance',

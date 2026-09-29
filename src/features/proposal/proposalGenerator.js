@@ -30,7 +30,7 @@ function getCollegeDeliverables(reason) {
   switch (reason) {
     case 'guest-lecture':
       return [
-        'Interactive keynote/masterclass by Sumit Sir on emerging tech & AI.',
+        'Interactive keynote/masterclass by Sumit on emerging tech & AI.',
         'Live Q&A with students on technology trends and career roadmaps.',
       ];
     case 'curriculum':
@@ -125,7 +125,7 @@ export function buildProposalData(role, answers = {}) {
       phone: contact.phone || '—',
     },
     speaker: {
-      name: 'Sumit Sir (Sumit Waghmare)',
+      name: 'Sumit (Sumit Waghmare)',
       title: 'Tech Speaker, AI/ML Specialist, & Ecosystem Builder',
       organizations: [
         'SuPrazo Technologies (Founder & Principal Architect)',

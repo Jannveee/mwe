@@ -11,21 +11,21 @@ import ConnectModal from '../../features/intake/ConnectModal.jsx'
  * wrappers (see Section.jsx).
  *
  * <IntakeProvider> wraps everything so any descendant (header CTA,
- * ecosystem cards, pricing, footer) can open the "Connect With Sumit Sir"
+ * ecosystem cards, pricing, footer) can open the "Connect With Sumit "
  * modal via useIntake() without prop-drilling.
  * ---------------------------------------------------------------------
  */
-function Layout({ children }) {
+function Layout({ children, currentView = 'main', onNavigate, onOpenAchievements }) {
   return (
     <IntakeProvider>
       <a href="#main-content" className="ts-skip-link">
         Skip to main content
       </a>
-      <Header />
+      <Header currentView={currentView} onNavigate={onNavigate} />
       <main id="main-content" className="ts-main">
         {children}
       </main>
-      <Footer />
+      <Footer onOpenAchievements={onOpenAchievements} />
       <ConnectModal />
     </IntakeProvider>
   )

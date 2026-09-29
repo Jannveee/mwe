@@ -6,8 +6,9 @@
 .ts-hero {
   position: relative;
   overflow: hidden;
-  min-height: 90vh;
-  padding-top: clamp(6rem, 13vh, 10rem);
+  min-height: 100vh;
+  min-height: 100svh;   
+  padding-top: calc(var(--header-h, 96px) + clamp(1.5rem, 5vh, 3.5rem));
   padding-bottom: var(--space-16);
   background-color: var(--color-bg-base);
 }
@@ -247,4 +248,4 @@
 }
 .ts-trust-item:hover {
   transform: translateY(-4px);
-}
+}

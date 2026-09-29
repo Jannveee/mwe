@@ -7,7 +7,7 @@ import { useIntake } from '../../features/intake/IntakeContext.jsx'
  * Header
  * ---------------------------------------------------------------------
  * Sticky site header: logo/wordmark, desktop nav, mobile hamburger
- * menu, and the primary "Connect With Sumit Sir" CTA.
+ * menu, and the primary "Connect With Sumit" CTA.
  *
  * Accessibility notes:
  * - Uses <header>/<nav> landmarks with aria-label.
@@ -19,10 +19,10 @@ import { useIntake } from '../../features/intake/IntakeContext.jsx'
  *   with aria-current="page" for screen readers, not just color.
  * ---------------------------------------------------------------------
  */
-function Header() {
+function Header({ currentView = 'main', onNavigate }) {
   const { openIntake } = useIntake()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeHref, setActiveHref] = useState('#home')
+  const [activeHref, setActiveHref] = useState(currentView === 'achievements' ? '#achievements' : '#home')
   const [scrolled, setScrolled] = useState(false)
   const toggleButtonRef = useRef(null)
   const menuId = 'primary-mobile-nav'
@@ -78,24 +78,32 @@ function Header() {
     return () => observer.disconnect()
   }, [])
 
-  function handleNavLinkClick() {
+  function handleNavLinkClick(e, href) {
     setMenuOpen(false)
+    if (currentView === 'achievements') {
+      if (e) e.preventDefault()
+      onNavigate?.('main', href)
+    }
+  }
+
+  function handleLogoClick(e) {
+    if (currentView === 'achievements') {
+      e.preventDefault()
+      onNavigate?.('main', '#home')
+    }
   }
 
   return (
     <header className={`ts-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="ts-header-inner ts-container">
-        <a href="#home" className="ts-logo" aria-label="TeamSumit — home">
+        <a href="#home" className="ts-logo" aria-label="Team Sumit — home" onClick={handleLogoClick}>
           <img
             src="/teamsumit-logo.png"
             alt="TeamSumit"
             className="ts-logo-img"
-            width="34"
-            height="34"
+            width="48"
+            height="48"
           />
-          <span className="ts-logo-text">
-            TeamSumit<span className="ts-logo-dot">.</span>
-          </span>
         </a>
 
         {/* Desktop navigation */}
@@ -108,6 +116,7 @@ function Header() {
                     href={item.href}
                     className="ts-nav-link"
                     aria-current={activeHref === item.href ? 'page' : undefined}
+                    onClick={(e) => handleNavLinkClick(e, item.href)}
                   >
                     {item.label}
                   </a>
@@ -120,7 +129,7 @@ function Header() {
         <div className="ts-header-actions">
           <div className="ts-header-cta">
             <ConnectButton size="sm" source="header">
-              Connect With Sumit Sir
+              Connect With Sumit
             </ConnectButton>
           </div>
 
@@ -155,7 +164,7 @@ function Header() {
                 href={item.href}
                 className="ts-nav-link ts-nav-link--mobile"
                 aria-current={activeHref === item.href ? 'page' : undefined}
-                onClick={handleNavLinkClick}
+                onClick={(e) => handleNavLinkClick(e, item.href)}
               >
                 {item.label}
               </a>

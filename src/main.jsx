@@ -17,6 +17,7 @@ import './styles/proposal.css'
 import './styles/pricing.css'
 import './styles/animations.css'
 import './styles/social.css'
+import './styles/achievements.css'
 import './styles/utilities.css'
 
 createRoot(document.getElementById('root')).render(
