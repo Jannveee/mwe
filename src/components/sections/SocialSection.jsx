@@ -1,6 +1,74 @@
 import { useInView } from '../../hooks/useInView.js'
 import Section from '../layout/Section.jsx'
 
+/**
+ * Platform icons
+ * - variant "tile":  coloured rounded square (used for the big card icon)
+ * - variant "glyph": plain outline camera, coloured via currentColor (Instagram button)
+ */
+function PlatformIcon({ id, variant = 'tile' }) {
+  if (id === 'instagram') {
+    if (variant === 'glyph') {
+      return (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="ts-social-platform-icon ts-social-platform-icon--glyph"
+        >
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+      )
+    }
+
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="ts-social-platform-icon">
+        <defs>
+          <linearGradient id="ts-ig-tile-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#F58529" />
+            <stop offset="0.5" stopColor="#DD2A7B" />
+            <stop offset="1" stopColor="#8134AF" />
+          </linearGradient>
+        </defs>
+        <rect width="24" height="24" rx="6" fill="url(#ts-ig-tile-grad)" />
+        <g
+          transform="translate(5 5) scale(0.583)"
+          fill="none"
+          stroke="#fff"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </g>
+      </svg>
+    )
+  }
+
+  // LinkedIn tile (used for both the big icon and the button icon)
+   return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="ts-social-platform-icon">
+      <rect width="24" height="24" rx="6" fill="#0077B5" />
+      <g fill="#fff" transform="translate(-0.5 0)">
+        {/* the "i": dot + stem */}
+        <circle cx="6.5" cy="6.6" r="1.7" />
+        <rect x="5" y="10" width="3" height="9" />
+        {/* the "n" */}
+        <path d="M10.3 10h3v1.3c.5-.9 1.6-1.6 3.1-1.6 2.6 0 3.7 1.6 3.7 4.3V19h-3v-4.4c0-1.3-.4-2.2-1.6-2.2-1.3 0-2.2.9-2.2 2.3V19h-3z" />
+      </g>
+    </svg>
+  )
+  
+}
+
 const SOCIAL_PROFILES = [
   {
     id: 'instagram',
@@ -14,23 +82,6 @@ const SOCIAL_PROFILES = [
     ],
     cta: 'Follow on Instagram',
     href: 'https://www.instagram.com/team_.sumit',
-    // SVG icon inline — Instagram gradient brand colours
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="ts-social-platform-icon">
-        <defs>
-          <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
-            <stop offset="0%" stopColor="#fdf497"/>
-            <stop offset="5%" stopColor="#fdf497"/>
-            <stop offset="45%" stopColor="#fd5949"/>
-            <stop offset="60%" stopColor="#d6249f"/>
-            <stop offset="90%" stopColor="#285AEB"/>
-          </radialGradient>
-        </defs>
-        <rect width="24" height="24" rx="6" fill="url(#ig-grad)"/>
-        <circle cx="12" cy="12" r="4" stroke="#fff" strokeWidth="1.8" fill="none"/>
-        <circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>
-      </svg>
-    ),
   },
   {
     id: 'linkedin',
@@ -43,13 +94,7 @@ const SOCIAL_PROFILES = [
       { value: 'Top', label: 'Voice' },
     ],
     cta: 'Connect on LinkedIn',
-    href: 'https://www.linkedin.com/in/sumit-ceo ',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="ts-social-platform-icon">
-        <rect width="24" height="24" rx="6" fill="#0A66C2"/>
-        <path d="M7 9.5H5V17H7V9.5ZM6 8.5C5.45 8.5 5 8.05 5 7.5S5.45 6.5 6 6.5 7 6.95 7 7.5 6.55 8.5 6 8.5ZM19 17H17V13.2C17 12.13 16.54 11.5 15.65 11.5C14.74 11.5 14.27 12.16 14.27 13.2V17H12.27V9.5H14.27V10.42C14.73 9.78 15.5 9.35 16.5 9.35C17.99 9.35 19 10.3 19 12.39V17Z" fill="#fff"/>
-      </svg>
-    ),
+    href: 'https://www.linkedin.com/in/sumit-ceo',
   },
 ]
 
@@ -63,7 +108,7 @@ function SocialCard({ profile, animClass }) {
     >
       {/* Platform icon */}
       <div className="ts-social-card__icon-wrap">
-        {profile.icon}
+        <PlatformIcon id={profile.id} variant="tile" />
       </div>
 
       {/* Handle & tagline */}
@@ -87,10 +132,15 @@ function SocialCard({ profile, animClass }) {
         href={profile.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="ts-social-card__cta"
+        className={`ts-social-card__cta ts-social-card__cta--${profile.id}`}
         aria-label={`${profile.cta} (opens in new tab)`}
       >
-        <span className="ts-social-card__cta-icon" aria-hidden="true">{profile.icon}</span>
+        <span className="ts-social-card__cta-icon" aria-hidden="true">
+          <PlatformIcon
+            id={profile.id}
+            variant={profile.id === 'instagram' ? 'glyph' : 'tile'}
+          />
+        </span>
         {profile.cta}
       </a>
     </article>
@@ -135,4 +185,3 @@ function SocialSection() {
 }
 
 export default SocialSection
-
