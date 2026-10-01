@@ -2,13 +2,11 @@
  * src/services/engagementService.js
  * ─────────────────────────────────────────────────────────────────────────
  * Business logic layer for engagement request operations.
- * Controllers call these functions — they never touch the model directly.
- * This separation makes the code testable and keeps controllers thin.
+ * Next.js route handlers call these functions.
  */
 
-'use strict';
-
-const EngagementRequest = require('../models/EngagementRequest');
+import { connectDB } from '../config/db.js';
+import EngagementRequest from '../models/EngagementRequest.js';
 
 /**
  * Create and persist a new engagement request.
@@ -16,7 +14,8 @@ const EngagementRequest = require('../models/EngagementRequest');
  * @param {object} data - Validated + sanitised request body
  * @returns {Promise<EngagementRequest>} The saved document
  */
-async function createEngagementRequest(data) {
+export async function createEngagementRequest(data) {
+  await connectDB();
   const request = new EngagementRequest(data);
   await request.save();
   return request;
@@ -28,7 +27,8 @@ async function createEngagementRequest(data) {
  *
  * @returns {Promise<EngagementRequest[]>}
  */
-async function getAllEngagementRequests() {
+export async function getAllEngagementRequests() {
+  await connectDB();
   return EngagementRequest.find({}).sort({ createdAt: -1 }).lean();
 }
 
@@ -38,11 +38,12 @@ async function getAllEngagementRequests() {
  * @param {string} id - MongoDB ObjectId string
  * @returns {Promise<EngagementRequest|null>}
  */
-async function getEngagementRequestById(id) {
+export async function getEngagementRequestById(id) {
+  await connectDB();
   return EngagementRequest.findById(id).lean();
 }
 
-module.exports = {
+export default {
   createEngagementRequest,
   getAllEngagementRequests,
   getEngagementRequestById,
