@@ -1,6 +1,6 @@
 import { STEPS } from '../constants.js'
 
-function ModalControls({ step, canGoBack, canGoNext, onNext, onBack, onCancel, onClose }) {
+function ModalControls({ step, canGoBack, nextLabel, canGoNext, onNext, onBack, onCancel, onClose }) {
   const isSuccess = step === STEPS.SUCCESS
   const isRoleStep = step === STEPS.ROLE
 
@@ -21,7 +21,7 @@ function ModalControls({ step, canGoBack, canGoNext, onNext, onBack, onCancel, o
         )}
       </div>
 
-      {/* Right: Cancel + Next/Close */}
+      {/* Right: Cancel + Next/Submit/Close */}
       <div className="ts-intake-controls-right">
         {isSuccess ? (
           <button type="button" className="ts-btn ts-btn--primary" onClick={onClose}>
@@ -39,7 +39,7 @@ function ModalControls({ step, canGoBack, canGoNext, onNext, onBack, onCancel, o
                 onClick={onNext}
                 disabled={!canGoNext}
               >
-                Next
+                {nextLabel || 'Next'}
               </button>
             )}
           </>

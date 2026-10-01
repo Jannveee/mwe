@@ -24,18 +24,21 @@ function ConnectModal() {
     useIntake()
 
   const questionnaireRef = useRef(null)
-  // Track canSubNext in state so parent re-renders when child value changes
+  const reviewRef = useRef(null)
+
+  // Track child state so the parent re-renders when it changes
   const [canSubNext, setCanSubNext] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   function handleSelectRole(roleId) {
     selectRole(roleId)
   }
 
-  // Reset canSubNext when leaving the questionnaire step
-  const isQuestionnaire = state.step === STEPS.QUESTIONNAIRE
   function handleNext() {
     if (state.step === STEPS.QUESTIONNAIRE && questionnaireRef.current) {
       questionnaireRef.current.goSubNext()
+    } else if (state.step === STEPS.REVIEW && reviewRef.current) {
+      reviewRef.current.submit()
     } else {
       goNext()
     }
@@ -54,8 +57,17 @@ function ConnectModal() {
     }
   }
 
-  // Is the Next button enabled? Use state (updated by child callback) for questionnaire step
-  const computedCanGoNext = state.step === STEPS.QUESTIONNAIRE ? canSubNext : derived.canGoNext
+  // Is the main button enabled?
+  const computedCanGoNext =
+    state.step === STEPS.QUESTIONNAIRE ? canSubNext :
+    state.step === STEPS.REVIEW ? !submitting :
+    derived.canGoNext
+
+  // Label of the main button: "Submit Request" on the review step
+  const nextLabel =
+    state.step === STEPS.REVIEW
+      ? (submitting ? 'Submitting…' : 'Submit Request')
+      : undefined
 
   function renderStep() {
     switch (state.step) {
@@ -77,7 +89,15 @@ function ConnectModal() {
           />
         )
       case STEPS.REVIEW:
-        return <ReviewStep role={state.role} answers={state.answers} descriptionId={DESCRIPTION_ID} />
+        return (
+          <ReviewStep
+            ref={reviewRef}
+            role={state.role}
+            answers={state.answers}
+            descriptionId={DESCRIPTION_ID}
+            onSubmittingChange={setSubmitting}
+          />
+        )
       case STEPS.SUCCESS:
         return <SuccessStep descriptionId={DESCRIPTION_ID} />
       default:
@@ -101,6 +121,7 @@ function ConnectModal() {
         step={state.step}
         canGoBack={derived.canGoBack || state.step === STEPS.QUESTIONNAIRE}
         canGoNext={computedCanGoNext}
+        nextLabel={nextLabel}
         onNext={handleNext}
         onBack={handleBack}
         onCancel={cancelIntake}
@@ -108,7 +129,6 @@ function ConnectModal() {
       />
     </ModalShell>
   )
-
 }
 
 export default ConnectModal
