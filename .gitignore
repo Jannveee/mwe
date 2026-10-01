@@ -1,3 +1,12 @@
 node_modules
 .vercel
 dist
+
+# Backend
+backend/node_modules
+backend/.env
+backend/.env.local
+
+# Frontend
+frontend/node_modules
+frontend/dist
