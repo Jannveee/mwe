@@ -7,27 +7,12 @@
  * The 3 front-end roles (college / student / industry) map to the
  * REQUEST_TYPES enum. Additional types cover global engagement and the
  * remaining manager requirements.
- *
- * Design notes:
- *  - Only `name`, `email`, and `requestType` are mandatory — all other
- *    fields are optional so the existing simple intake path is not broken.
- *  - `details` is a flexible Mixed map so it stores role+reason-specific
- *    data from the front-end (institutionName, audienceSize, etc.)
- *    without requiring a rigid schema per flow.
- *  - `country` defaults to null (not "India") so global requests are
- *    fully supported.
- *  - Timestamps are managed automatically by Mongoose.
  */
 
-'use strict';
-
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
 
 // ─── Allowed request types ────────────────────────────────────────────────
-// These align with the front-end role+reason model and the manager's
-// requirement for a consistent enum.
-const REQUEST_TYPES = [
+export const REQUEST_TYPES = [
   'INDIVIDUAL_MENTORSHIP',   // student: career-guidance, idea-validation, resume-prep, networking
   'COLLEGE_UNIVERSITY',      // college role — any reason
   'WORKSHOP',                // faculty-dev, corporate-training
@@ -71,8 +56,6 @@ const EngagementRequestSchema = new Schema(
     },
 
     // ── Front-end role + reason (preserves intake context) ───────────────
-    // role:   'college' | 'student' | 'industry'
-    // reason: e.g. 'guest-lecture', 'career-guidance', 'consulting', …
     role: {
       type: String,
       trim: true,
@@ -91,7 +74,6 @@ const EngagementRequestSchema = new Schema(
       default: null,
     },
     organizationType: {
-      // e.g. 'university', 'company', 'ngo', 'government', 'individual'
       type: String,
       trim: true,
       default: null,
@@ -101,7 +83,7 @@ const EngagementRequestSchema = new Schema(
     country: {
       type: String,
       trim: true,
-      default: null,           // null = not specified; no default assumption
+      default: null,
     },
     city: {
       type: String,
@@ -109,7 +91,6 @@ const EngagementRequestSchema = new Schema(
       default: null,
     },
     engagementMode: {
-      // 'in-person' | 'online' | 'hybrid'
       type: String,
       enum: {
         values: ['in-person', 'online', 'hybrid', null],
@@ -133,9 +114,6 @@ const EngagementRequestSchema = new Schema(
     },
 
     // ── Role-specific detail fields from the intake flow ─────────────────
-    // Stored as a flexible map (Mixed) to accommodate the many field
-    // combinations per role+reason without schema bloat.
-    // Examples: { institutionName, audienceSize, topic, eventDate, … }
     details: {
       type: Schema.Types.Mixed,
       default: {},
@@ -143,32 +121,32 @@ const EngagementRequestSchema = new Schema(
 
     // ── Submission metadata ───────────────────────────────────────────────
     source: {
-      // Which part of the site triggered the form: 'homepage', 'pricing', etc.
       type: String,
       trim: true,
       default: null,
     },
     status: {
-      // Internal workflow status — allows future admin tooling without a
-      // separate collection.
       type: String,
       enum: ['pending', 'reviewed', 'responded', 'closed'],
       default: 'pending',
     },
   },
   {
-    timestamps: true,         // createdAt + updatedAt managed automatically
-    versionKey: false,        // omit __v field from responses
+    timestamps: true,
+    versionKey: false,
   }
 );
 
 // ─── Indexes ──────────────────────────────────────────────────────────────
-// Useful for admin lookups / filtering without a full collection scan.
 EngagementRequestSchema.index({ email: 1 });
 EngagementRequestSchema.index({ requestType: 1 });
 EngagementRequestSchema.index({ status: 1 });
 EngagementRequestSchema.index({ createdAt: -1 });
 
-// ─── Export ───────────────────────────────────────────────────────────────
-module.exports = mongoose.model('EngagementRequest', EngagementRequestSchema);
-module.exports.REQUEST_TYPES = REQUEST_TYPES;
+// Cache model on mongoose instance to prevent recompilation in Next.js hot reload
+const EngagementRequest =
+  mongoose.models.EngagementRequest ||
+  mongoose.model('EngagementRequest', EngagementRequestSchema);
+
+export default EngagementRequest;
+export { EngagementRequest };
