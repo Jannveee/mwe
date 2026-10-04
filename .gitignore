@@ -6,6 +6,8 @@ dist
 backend/node_modules
 backend/.env
 backend/.env.local
+backend/.mongodb_data
+backend/.next
 
 # Frontend
 frontend/node_modules

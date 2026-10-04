@@ -1,39 +1,60 @@
 /**
  * src/middleware/authAdmin.js
  * ─────────────────────────────────────────────────────────────────────────
- * Very simple API key authentication for admin/internal endpoints.
+ * API key authentication for Next.js Route Handlers.
  * Requires the 'x-api-key' header to match process.env.ADMIN_API_KEY.
  */
 
-'use strict';
+import { jsonResponse } from './cors.js';
 
-function authAdmin(req, res, next) {
-  const apiKey = req.headers['x-api-key'];
+export function verifyAdminAuth(req) {
+  const apiKey = req.headers ? req.headers.get('x-api-key') : null;
   const expectedKey = process.env.ADMIN_API_KEY;
 
   if (!expectedKey) {
-    console.warn('[WARN] ADMIN_API_KEY is not set in environment variables. Admin endpoints are inaccessible.');
-    return res.status(500).json({
-      success: false,
-      message: 'Server configuration error: Authentication is not configured properly.',
-    });
+    console.warn(
+      '[WARN] ADMIN_API_KEY is not set in environment variables. Admin endpoints are inaccessible.'
+    );
+    return {
+      authorized: false,
+      response: jsonResponse(
+        {
+          success: false,
+          message: 'Server configuration error: Authentication is not configured properly.',
+        },
+        500,
+        req
+      ),
+    };
   }
 
   if (!apiKey) {
-    return res.status(401).json({
-      success: false,
-      message: 'Unauthorized: Missing x-api-key header.',
-    });
+    return {
+      authorized: false,
+      response: jsonResponse(
+        {
+          success: false,
+          message: 'Unauthorized: Missing x-api-key header.',
+        },
+        401,
+        req
+      ),
+    };
   }
 
   if (apiKey !== expectedKey) {
-    return res.status(403).json({
-      success: false,
-      message: 'Forbidden: Invalid API key.',
-    });
+    return {
+      authorized: false,
+      response: jsonResponse(
+        {
+          success: false,
+          message: 'Forbidden: Invalid API key.',
+        },
+        403,
+        req
+      ),
+    };
   }
 
-  return next();
+  return { authorized: true };
 }
-
-module.exports = { authAdmin };
