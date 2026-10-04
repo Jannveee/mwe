@@ -4,14 +4,20 @@
 
 
 export const ABOUT_BIO = [
-  'Sumit Waghmare is a technology entrepreneur from India and the Director of SuPrazo Technologies. He is passionate about artificial intelligence and focuses on building products that automate operations, reduce costs, and improve productivity.',
+  'Sumit Waghmare is a technology entrepreneur and engineering mentor based in Nagpur, Maharashtra, India, and the Director of SuPrazo Technologies. Passionate about artificial intelligence, innovation, and youth entrepreneurship, he builds products that automate operations while leading college and university engagement, keynotes and workshops, hackathons, and global industry-academia collaboration.',
 ]
 
 // Words/phrases in ABOUT_BIO to visually highlight (exact case-sensitive match)
 export const ABOUT_HIGHLIGHT_TERMS = [
   'technology entrepreneur',
+  'engineering mentor',
   'Director of SuPrazo Technologies',
+  'Nagpur, Maharashtra, India',
   'artificial intelligence',
+  'innovation',
+  'college and university engagement',
+  'hackathons',
+  'industry-academia collaboration',
 ]
 export const TIMELINE_MILESTONES = [
   {
