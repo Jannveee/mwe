@@ -4,46 +4,49 @@
 
 
 export const ABOUT_BIO = [
-  'Sumit Waghmare is a technology entrepreneur and engineering mentor based in Nagpur, Maharashtra, India, and the Director of SuPrazo Technologies. Passionate about artificial intelligence, innovation, and youth entrepreneurship, he builds products that automate operations while leading college and university engagement, keynotes and workshops, hackathons, and global industry-academia collaboration.',
+  'Sumit Krishna Waghmare is an Indian technology entrepreneur, mentor, hackathon organizer and International Book of Records (IBOR) world record holder from Nagpur, Maharashtra, India. He is the Director of SuPrazo Technologies and works across artificial intelligence, technology, student education, entrepreneurship, mentorship and innovation.',
+  'On 13 July 2025, Sumit set the IBOR world record as the youngest person to organise a hackathon event, at 21 years of age — making him one of India’s youngest recognised hackathon organisers. He studies Information Technology at Rashtrasant Tukadoji Maharaj Nagpur University (RTMNU) and has delivered seminars, workshops and mentorship sessions across colleges and universities in India.',
 ]
 
 // Words/phrases in ABOUT_BIO to visually highlight (exact case-sensitive match)
 export const ABOUT_HIGHLIGHT_TERMS = [
   'technology entrepreneur',
-  'engineering mentor',
+  'mentor',
+  'hackathon organizer',
+  'International Book of Records',
+  'world record holder',
   'Director of SuPrazo Technologies',
   'Nagpur, Maharashtra, India',
   'artificial intelligence',
   'innovation',
-  'college and university engagement',
-  'hackathons',
-  'industry-academia collaboration',
+  'youngest person to organise a hackathon event',
+  'Rashtrasant Tukadoji Maharaj Nagpur University',
 ]
 export const TIMELINE_MILESTONES = [
   {
     id: 'graduation',
     marker: '2026',
-    title: 'Graduated in Information Technology',
-    description: 'Completed his degree in Information Technology.',
+    title: 'B.Tech Information Technology — RTMNU, Nagpur',
+    description: 'Completing his Bachelor of Technology in Information Technology at Rashtrasant Tukadoji Maharaj Nagpur University.',
   },
   {
     id: 'academy',
     marker: 'Age 19',
-    title: 'Founded an academy',
-    description: 'Founded an academy focused on mentorship and practical skills.',
+    title: 'Founded CodeElevate Academy',
+    description: 'Founded CodeElevate Academy, focused on practical skills, mentorship and career preparation for engineering students.',
   },
   {
     id: 'initiatives',
     marker: 'Age 20',
-    title: 'Organized technology & innovation initiatives',
-    description: 'Organized technology and innovation initiatives.',
+    title: 'Director, SuPrazo Technologies',
+    description: 'Became Director of SuPrazo Technologies, working on AI-powered products, automation, software development, and technology consulting.',
   },
   {
-    id: 'judge-speaker',
+    id: 'world-record',
     marker: 'Age 21',
-    title: 'National/International-level judge, speaker & judge at colleges',
+    title: 'IBOR World Record — Youngest Hackathon Organiser',
     description:
-      'Served as a national-level judge for technical competitions and innovation events, and was invited as a speaker and judge at colleges across India.',
+      'On 13 July 2025, set the International Book of Records (IBOR) world record as the youngest person to organise a hackathon event, at 21 years, 1 month and 4 days old, in Nagpur, Maharashtra, India.',
   },
 ]
 
