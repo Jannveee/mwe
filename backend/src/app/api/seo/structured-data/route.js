@@ -34,7 +34,7 @@ const STRUCTURED_DATA = {
         'Sumit Krishna Waghmare is an Indian technology entrepreneur, mentor, hackathon organizer and International Book of Records world record holder from Nagpur, Maharashtra. He is the Director of SuPrazo Technologies and works across AI, technology, student education, entrepreneurship, mentorship and innovation.',
 
       url: 'https://teamsumit.com',
-      image: 'https://teamsumit.com/sumit-waghmare.jpg',
+      image: 'https://teamsumit.com/api/images/sumitsir3.jpeg',
       email: 'sumitwaghmare645@gmail.com',
       birthDate: '2004-06-09',
 
@@ -203,6 +203,22 @@ const STRUCTURED_DATA = {
   ],
 };
 
+export function getStructuredData() {
+  const baseUrl = (process.env.BACKEND_URL || process.env.SITE_URL || 'https://teamsumit.com').replace(/\/+$/, '');
+  return {
+    ...STRUCTURED_DATA,
+    '@graph': STRUCTURED_DATA['@graph'].map((node) => {
+      if (node['@type'] === 'Person') {
+        return {
+          ...node,
+          image: `${baseUrl}/api/images/sumitsir3.jpeg`,
+        };
+      }
+      return node;
+    }),
+  };
+}
+
 export async function OPTIONS(req) {
   return handleOptions(req);
 }
@@ -211,9 +227,10 @@ export async function GET(req) {
   return jsonResponse(
     {
       success: true,
-      data: STRUCTURED_DATA,
+      data: getStructuredData(),
     },
     200,
     req
   );
 }
+

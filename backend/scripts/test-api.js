@@ -40,6 +40,17 @@ async function request(method, path, body, extraHeaders = {}) {
   return { status: res.status, body: json };
 }
 
+async function requestRaw(method, path, extraHeaders = {}) {
+  const res = await fetch(`${BASE}${path}`, {
+    method,
+    headers: { ...extraHeaders },
+  });
+  const contentType = res.headers.get('content-type') || '';
+  const cacheControl = res.headers.get('cache-control') || '';
+  const buffer = await res.arrayBuffer();
+  return { status: res.status, contentType, cacheControl, size: buffer.byteLength };
+}
+
 function assert(label, condition, detail = '') {
   if (condition) {
     passed++;
@@ -205,6 +216,39 @@ async function runTests() {
     assert('T9b Correct ID returned',         body.data?._id === savedId);
   } else {
     results.push({ label: 'T9b GET by ID', result: '⏭  SKIP (no saved ID)' });
+  }
+
+  // ── T10: Image serving endpoints ──────────────────────────────────────
+  {
+    const img1 = await requestRaw('GET', '/images/sumitsir1.jpeg');
+    assert('T10a sumitsir1.jpeg returns 200',                img1.status === 200, `got ${img1.status}`);
+    assert('T10a sumitsir1.jpeg content-type is image/jpeg', img1.contentType.includes('image/jpeg'), img1.contentType);
+    assert('T10a sumitsir1.jpeg has caching headers',        img1.cacheControl.includes('public'), img1.cacheControl);
+    assert('T10a sumitsir1.jpeg returns non-empty content',  img1.size > 10000, `size: ${img1.size}`);
+
+    const img2 = await requestRaw('GET', '/images/sumitsir2.jpeg');
+    assert('T10b sumitsir2.jpeg returns 200',                img2.status === 200, `got ${img2.status}`);
+    assert('T10b sumitsir2.jpeg content-type is image/jpeg', img2.contentType.includes('image/jpeg'), img2.contentType);
+    assert('T10b sumitsir2.jpeg has caching headers',        img2.cacheControl.includes('public'), img2.cacheControl);
+    assert('T10b sumitsir2.jpeg returns non-empty content',  img2.size > 10000, `size: ${img2.size}`);
+
+    const img3 = await requestRaw('GET', '/images/sumitsir3.jpeg');
+    assert('T10c sumitsir3.jpeg returns 200',                img3.status === 200, `got ${img3.status}`);
+    assert('T10c sumitsir3.jpeg content-type is image/jpeg', img3.contentType.includes('image/jpeg'), img3.contentType);
+    assert('T10c sumitsir3.jpeg has caching headers',        img3.cacheControl.includes('public'), img3.cacheControl);
+    assert('T10c sumitsir3.jpeg returns non-empty content',  img3.size > 10000, `size: ${img3.size}`);
+
+    const missing = await requestRaw('GET', '/images/unknown.jpeg');
+    assert('T10d unknown image returns 404',                 missing.status === 404, `got ${missing.status}`);
+  }
+
+  // ── T11: SEO structured-data image reference ─────────────────────────
+  {
+    const { status, body } = await request('GET', '/seo/structured-data');
+    assert('T11 Structured data returns 200',               status === 200, `got ${status}`);
+    const personNode = body.data?.['@graph']?.find((node) => node['@type'] === 'Person');
+    assert('T11 Person node present',                      !!personNode);
+    assert('T11 Person image references sumitsir3.jpeg',    typeof personNode?.image === 'string' && personNode.image.endsWith('/api/images/sumitsir3.jpeg'), personNode?.image);
   }
 
   // ─── Summary ──────────────────────────────────────────────────────────

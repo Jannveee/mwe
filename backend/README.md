@@ -205,9 +205,10 @@ Returns a single submission by its MongoDB ObjectId.
 
 ---
 
-### SEO / Structured Data
+### SEO / Structured Data & Public Images
 
 ```
+GET /api/images/:filename       # Public SEO images (sumitsir1.jpeg, sumitsir2.jpeg, sumitsir3.jpeg)
 GET /api/seo/structured-data    # JSON-LD schema for Person, Website, and Services
 GET /api/seo/sitemap            # Page list for sitemap generation
 ```
@@ -232,6 +233,8 @@ Tests cover:
 7. Missing required fields are handled (422)
 8. GET all appointments
 9. GET single appointment by ID
+10. Public image delivery (sumitsir1.jpeg, sumitsir2.jpeg, sumitsir3.jpeg, 404 for missing)
+11. Structured data Person image reference (sumitsir3.jpeg)
 
 ---
 
@@ -313,6 +316,7 @@ curl -X POST http://localhost:5000/api/appointments \
 | `MONGODB_URI` | Yes | — | MongoDB connection string |
 | `ALLOWED_ORIGINS` | No | (permissive in dev) | Comma-separated list of allowed CORS origins |
 | `SITE_URL` | No | `https://teamsumit.com` | Base URL used in sitemap output |
+| `BACKEND_URL` | No | `https://teamsumit.com` (or `SITE_URL`) | Base backend URL used for structured-data image URLs |
 | `ADMIN_API_KEY` | Yes | — | Secret key required to access admin GET routes |
 
 ---

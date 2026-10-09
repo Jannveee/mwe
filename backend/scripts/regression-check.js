@@ -258,15 +258,17 @@ async function run() {
   {
     const r = await check('SEO-1     GET /api/seo/structured-data → 200', 'GET', '/seo/structured-data');
     const graph = r.body.data && r.body.data['@graph'] ? r.body.data['@graph'] : [];
-    const hasPerson  = graph.some(function(n) { return n['@type'] === 'Person'; });
+    const personNode = graph.find(function(n) { return n['@type'] === 'Person'; });
+    const hasPerson  = !!personNode;
     const hasWebSite = graph.some(function(n) { return n['@type'] === 'WebSite'; });
     const hasService = graph.some(function(n) { return n['@type'] === 'Service'; });
+    const hasValidImage = !!personNode && typeof personNode.image === 'string' && personNode.image.endsWith('/api/images/sumitsir3.jpeg');
     const context    = r.body.data && r.body.data['@context'] === 'https://schema.org';
     result(
       r.label,
-      r.status === 200 && r.body.success === true && graph.length === 4 && hasPerson && hasWebSite && hasService && context,
+      r.status === 200 && r.body.success === true && graph.length === 4 && hasPerson && hasWebSite && hasService && hasValidImage && context,
       r.status,
-      'graph_items=' + graph.length + ' Person=' + hasPerson + ' WebSite=' + hasWebSite + ' Service=' + hasService + ' schema.org=' + context
+      'graph_items=' + graph.length + ' Person=' + hasPerson + ' WebSite=' + hasWebSite + ' Service=' + hasService + ' image=' + (personNode ? personNode.image : 'missing') + ' schema.org=' + context
     );
   }
 
@@ -299,6 +301,61 @@ async function run() {
       res.status === 204,
       res.status,
       'Allow-Methods=' + (res.headers.get('access-control-allow-methods') || 'MISSING') + ' Allow-Origin=' + (res.headers.get('access-control-allow-origin') || 'MISSING')
+    );
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // SECTION 8: Image endpoints
+  // ────────────────────────────────────────────────────────────
+  async function checkImg(label, path) {
+    try {
+      const res = await fetch(BASE + path);
+      const ct = res.headers.get('content-type') || '';
+      const cc = res.headers.get('cache-control') || '';
+      const buf = await res.arrayBuffer();
+      return { label, status: res.status, ct, cc, size: buf.byteLength };
+    } catch (err) {
+      return { label, status: 0, ct: '', cc: '', size: 0, err: err.message };
+    }
+  }
+
+  {
+    const r = await checkImg('IMG-1     GET /api/images/sumitsir1.jpeg → 200', '/images/sumitsir1.jpeg');
+    result(
+      r.label,
+      r.status === 200 && r.ct.includes('image/jpeg') && r.cc.includes('public') && r.size > 10000,
+      r.status,
+      'content-type=' + r.ct + ' cache-control=' + r.cc + ' size=' + r.size
+    );
+  }
+
+  {
+    const r = await checkImg('IMG-2     GET /api/images/sumitsir2.jpeg → 200', '/images/sumitsir2.jpeg');
+    result(
+      r.label,
+      r.status === 200 && r.ct.includes('image/jpeg') && r.cc.includes('public') && r.size > 10000,
+      r.status,
+      'content-type=' + r.ct + ' cache-control=' + r.cc + ' size=' + r.size
+    );
+  }
+
+  {
+    const r = await checkImg('IMG-3     GET /api/images/sumitsir3.jpeg → 200', '/images/sumitsir3.jpeg');
+    result(
+      r.label,
+      r.status === 200 && r.ct.includes('image/jpeg') && r.cc.includes('public') && r.size > 10000,
+      r.status,
+      'content-type=' + r.ct + ' cache-control=' + r.cc + ' size=' + r.size
+    );
+  }
+
+  {
+    const r = await checkImg('IMG-4     GET /api/images/not-found.jpeg → 404', '/images/not-found.jpeg');
+    result(
+      r.label,
+      r.status === 404,
+      r.status,
+      'status=' + r.status
     );
   }
 
