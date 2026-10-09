@@ -24,18 +24,37 @@ const STRUCTURED_DATA = {
     {
       '@type': 'Person',
       '@id': 'https://teamsumit.com/#sumit-waghmare',
-      name: 'Sumit Waghmare',
+      name: 'Sumit Krishna Waghmare',
+      alternateName: 'Sumit Waghmare',
 
       // Primary role title; additional roles expressed via hasOccupation below.
       jobTitle: 'Director, SuPrazo Technologies',
 
       description:
-        'Sumit Waghmare is a technology entrepreneur, engineering mentor, and the Director of SuPrazo Technologies. A world record holder recognised for organising engineering innovation events, he has delivered over 50 seminars and workshops, mentored engineering students nationally and internationally, and served as a national- and international-level judge and speaker. He works with colleges, universities, students, and industry organisations across India and globally to bridge the gap between academic learning and real-world engineering practice.',
+        'Sumit Krishna Waghmare is an Indian technology entrepreneur, mentor, hackathon organizer and International Book of Records world record holder from Nagpur, Maharashtra. He is the Director of SuPrazo Technologies and works across AI, technology, student education, entrepreneurship, mentorship and innovation.',
 
       url: 'https://teamsumit.com',
+      image: 'https://teamsumit.com/sumit-waghmare.jpg',
+      email: 'sumitwaghmare645@gmail.com',
+      birthDate: '2004-06-09',
 
-      // Social and professional profile URLs — to be added when verified URLs are available.
-      sameAs: [],
+      nationality: {
+        '@type': 'Country',
+        name: 'India',
+      },
+
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Nagpur',
+        addressRegion: 'Maharashtra',
+        addressCountry: 'IN',
+      },
+
+      // Verified social / professional profile URLs.
+      sameAs: [
+        'https://www.linkedin.com/in/sumit-ceo',
+        'https://www.instagram.com/team_.sumit/',
+      ],
 
       // ── Multiple occupations / roles ────────────────────────────────────
       hasOccupation: [
@@ -49,48 +68,54 @@ const STRUCTURED_DATA = {
           '@type': 'Occupation',
           name: 'Engineering Mentor & Speaker',
           description:
-            'Delivers keynote sessions, masterclasses, and one-on-one mentorship to engineering students, colleges, and universities in India and internationally.',
+            'Delivers keynote sessions, masterclasses, and one-on-one mentorship to engineering students, colleges, and universities in India.',
         },
         {
           '@type': 'Occupation',
-          name: 'National & International Judge',
+          name: 'Hackathon Organizer & Judge',
           description:
-            'Serves as a judge at national- and international-level technology competitions, hackathons, and innovation challenges.',
+            'Organizes and judges hackathons and technology innovation challenges for students and institutions across India.',
         },
       ],
 
       // ── Awards and recognitions ─────────────────────────────────────────
+      // IBOR record achieved 13 July 2025 (not 2026).
       award: [
-        'World Record Holder',
-        'One World Record',
-        'India\'s Youngest Organizer',
-        'India\'s Youngest Organiser of a Hackathon Event (Nagpur, Maharashtra)',
-        '#1 Highest Profile Engineer across University',
-        'Best Engineer Award',
-        'Top Performer Award',
-        'Student of the Year',
-        'Entrepreneur of the Year',
-        '50+ Certificates across domains',
-        'National and international awards and recognitions',
+        'International Book of Records — Youngest to Organise Hackathon Event (13 July 2025, Nagpur, Maharashtra, India)',
+        'World Record Holder — International Book of Records',
+        'India\'s Youngest Organizer of a Hackathon Event',
         'Felicitated by RTMNU University (Vice Chancellor) for contributions to education and youth entrepreneurship',
+        'National and international awards and recognitions',
+        '50+ Certificates across domains',
       ],
 
       // ── Areas of expertise ──────────────────────────────────────────────
-      // Preserves all original entries; adds manager-specified domains.
       knowsAbout: [
         'Artificial Intelligence',
+        'Generative AI',
+        'AI Tools',
+        'AI Education',
         'Entrepreneurship',
         'Innovation',
         'Engineering Mentorship',
+        'Student Mentorship',
         'Technology Career Guidance',
         'College and University Engagement',
         'Industry-Academia Collaboration',
         'Startup Incubation',
-        'Software Engineering',
+        'Startup Development',
+        'Software Development',
+        'Web Technologies',
+        'Digital Products',
+        'Technology Consulting',
+        'Automation',
         'Hackathon Organisation',
         'Large-scale Training Programs',
         'Innovation and Student Opportunity Cells',
         'Global Education Engagement',
+        'Education Technology',
+        'Career Preparation',
+        'Corporate Mobility',
       ],
 
       // ── Employer / venture ──────────────────────────────────────────────
@@ -106,6 +131,26 @@ const STRUCTURED_DATA = {
           name: 'Nagpur, Maharashtra, India',
         },
       },
+
+      // ── Education ───────────────────────────────────────────────────────
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'Rashtrasant Tukadoji Maharaj Nagpur University',
+        alternateName: 'RTMNU',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Nagpur',
+          addressRegion: 'Maharashtra',
+          addressCountry: 'IN',
+        },
+      },
+
+      // ── Associated organisations ─────────────────────────────────────────
+      memberOf: [
+        { '@type': 'Organization', name: 'SuPrazo Technologies' },
+        { '@type': 'Organization', name: 'CodeElevate Academy' },
+        { '@type': 'Organization', name: 'Team Sumit' },
+      ],
     },
 
     // ── Node 2: WebSite ──────────────────────────────────────────────────
@@ -113,9 +158,9 @@ const STRUCTURED_DATA = {
       '@type': 'WebSite',
       '@id': 'https://teamsumit.com/#website',
       url: 'https://teamsumit.com',
-      name: 'TeamSumit — Technology, Education & Venture',
+      name: 'TeamSumit — Sumit Waghmare | Technology, Education & Venture',
       description:
-        'Official portal for Sumit Waghmare — Director of SuPrazo Technologies, engineering mentor, keynote speaker, and national- and international-level judge. Colleges, universities, students, and industry partners can connect to request mentorship, guest lectures, faculty development workshops, hackathon partnerships, large-scale training programs, and global engagement.',
+        'Official portal for Sumit Krishna Waghmare — Indian technology entrepreneur, world record holder, Director of SuPrazo Technologies, engineering mentor, hackathon organizer, and keynote speaker from Nagpur, Maharashtra, India.',
       publisher: {
         '@id': 'https://teamsumit.com/#sumit-waghmare',
       },

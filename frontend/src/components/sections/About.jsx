@@ -64,8 +64,8 @@ function FounderShowcaseCard() {
             </svg>
           </span>
           <div className="ts-about-badge-text">
-            <span className="ts-about-badge-title">India's Youngest Organizer · Gold Medalist</span>
-            <span className="ts-about-badge-batch">Graduating Batch 2022–2026</span>
+            <span className="ts-about-badge-title">World Record Holder · IBOR 2025</span>
+            <span className="ts-about-badge-batch">B.Tech IT · RTMNU 2022–2026</span>
           </div>
         </div>
       </div>
