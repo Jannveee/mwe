@@ -8,6 +8,8 @@
 
 import { jsonResponse, handleOptions } from '../../../../middleware/cors.js';
 
+const DEFAULT_SITE_URL = 'https://mwe-vor4.vercel.app';
+
 const SITEMAP_PAGES = [
   { path: '/',              changefreq: 'weekly',  priority: 1.0 },
   { path: '/#about',        changefreq: 'monthly', priority: 0.8 },
@@ -22,7 +24,7 @@ export async function OPTIONS(req) {
 }
 
 export async function GET(req) {
-  const baseUrl = process.env.SITE_URL || 'https://teamsumit.com';
+  const baseUrl = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '');
   const pages = SITEMAP_PAGES.map((p) => ({
     ...p,
     url: `${baseUrl}${p.path}`,
