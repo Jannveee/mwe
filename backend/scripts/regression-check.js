@@ -259,16 +259,18 @@ async function run() {
     const r = await check('SEO-1     GET /api/seo/structured-data → 200', 'GET', '/seo/structured-data');
     const graph = r.body.data && r.body.data['@graph'] ? r.body.data['@graph'] : [];
     const personNode = graph.find(function(n) { return n['@type'] === 'Person'; });
-    const hasPerson  = !!personNode;
-    const hasWebSite = graph.some(function(n) { return n['@type'] === 'WebSite'; });
-    const hasService = graph.some(function(n) { return n['@type'] === 'Service'; });
-    const hasValidImage = !!personNode && typeof personNode.image === 'string' && personNode.image.endsWith('/api/images/sumitsir3.jpeg');
-    const context    = r.body.data && r.body.data['@context'] === 'https://schema.org';
+    const hasPerson   = !!personNode;
+    const hasWebSite  = graph.some(function(n) { return n['@type'] === 'WebSite'; });
+    const hasWebPage  = graph.some(function(n) { return n['@type'] === 'WebPage'; });
+    const hasService  = graph.some(function(n) { return n['@type'] === 'Service'; });
+    // Image must now resolve from the frontend canonical origin (sumit-waghmare.jpg).
+    const hasValidImage = !!personNode && typeof personNode.image === 'string' && personNode.image.endsWith('/sumit-waghmare.jpg');
+    const context     = r.body.data && r.body.data['@context'] === 'https://schema.org';
     result(
       r.label,
-      r.status === 200 && r.body.success === true && graph.length === 4 && hasPerson && hasWebSite && hasService && hasValidImage && context,
+      r.status === 200 && r.body.success === true && graph.length === 5 && hasPerson && hasWebSite && hasWebPage && hasService && hasValidImage && context,
       r.status,
-      'graph_items=' + graph.length + ' Person=' + hasPerson + ' WebSite=' + hasWebSite + ' Service=' + hasService + ' image=' + (personNode ? personNode.image : 'missing') + ' schema.org=' + context
+      'graph_items=' + graph.length + ' Person=' + hasPerson + ' WebSite=' + hasWebSite + ' WebPage=' + hasWebPage + ' Service=' + hasService + ' image=' + (personNode ? personNode.image : 'missing') + ' schema.org=' + context
     );
   }
 
